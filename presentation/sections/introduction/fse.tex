@@ -1,0 +1,86 @@
+% Fair Signature Exchange (Example)
+\begin{frame}
+	\frametitle{Fair Signature Exchange (Example)}
+
+	\begin{itemize}
+		\setlength\itemsep{1em}
+		\item Two parties Alice and Bob
+		\item Want to sign an item (e.g. a contract)
+	\end{itemize}
+	
+	\vspace*{.5cm}
+
+	\noindent\phantom{ }
+\end{frame}
+
+\begin{frame}
+	\frametitle{Fair Signature Exchange (Example)}
+
+	\begin{itemize}
+		\setlength\itemsep{1em}
+		\item Two parties Alice and Bob
+		\item Want to sign an item (e.g. a contract)
+	\end{itemize}
+
+	\vspace*{.5cm}
+
+	\begin{tikzpicture}[node distance=2cm,auto,>=stealth']
+			\node[] (bob) {Bob};
+			\node[left = of bob] (alice) {Alice};
+			\node[below of=bob, node distance=3cm] (bobground) {};
+			\node[below of=alice, node distance=3cm] (aliceground) {};
+			
+			% vertical lines
+			\draw (alice) -- (aliceground);
+			\draw (bob) -- (bobground);
+
+			% signs contract -> receives signed contract
+			\draw[->, dashed] ($(alice)!0.2!(aliceground)$) -- node[left, scale=1, pos=-.02]{signs contract} ($(bob)!0.25!(bobground)$);
+			\draw($(bob)!0.25!(bobground)$) -- node[right, scale=1, xshift=0.1cm]{receives signed contract} ($(bob)!0.25!(bobground)$);
+	\end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Fair Signature Exchange (Example)}
+
+	\begin{itemize}
+		\setlength\itemsep{1em}
+		\item Two parties Alice and Bob
+		\item Want to sign an item (e.g. a contract)
+	\end{itemize}
+
+	\vspace*{.5cm}
+
+	\begin{tikzpicture}[node distance=2cm,auto,>=stealth']
+			\node[] (bob) {Bob};
+			\node[left = of bob] (alice) {Alice};
+			\node[below of=bob, node distance=3cm] (bobground) {};
+			\node[below of=alice, node distance=3cm] (aliceground) {};
+			
+			% vertical lines
+			\draw (alice) -- (aliceground);
+			\draw (bob) -- (bobground);
+
+			% signs contract -> receives signed contract
+			\draw[->, dashed] ($(alice)!0.2!(aliceground)$) -- node[left, scale=1, pos=-.02]{signs contract} ($(bob)!0.25!(bobground)$);
+			\draw($(bob)!0.25!(bobground)$) -- node[right, scale=1, xshift=0.1cm]{receives signed contract} ($(bob)!0.25!(bobground)$);
+
+			\draw[->, strike thru arrow, dashed] ($(bob)!0.5!(bobground)$) -- node[right, scale=1, pos=-.02]{decides he doesn't want to sign} ($(alice)!0.6!(aliceground)$);
+			\draw ($(alice)!0.6!(aliceground)$) -- node[left, scale=1, pos=.02]{waiting...} ($(alice)!0.6!(aliceground)$);
+	\end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Fair Signature Exchange (continued)}
+	
+	\begin{itemize}
+		\setlength\itemsep{1em}
+		\item Why is this important?
+		\item What approaches alredy exist?
+			\begin{itemize}
+				\item timed release of signatures
+				\item optimistic fair exchange
+			\end{itemize}
+		\item What problems arise with those?
+	\end{itemize}
+\end{frame}

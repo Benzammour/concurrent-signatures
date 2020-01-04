@@ -1,13 +1,13 @@
 \begin{frame}
 	\frametitle{Discrete Logarithmic Assumption}
 
-	\begin{block}{Definition (Discrete Logarithm)}
+	\begin{definition}[discrete logarithm]
 		\begin{itemize}
 			\item Group $\mathbb{G}$ given
 			\item $b^k$ always defined in $\mathbb{G}$ through $b^k = \underbrace{b\cdot b \cdots b}_{k\text{ times}}$
-			\item the \textit{discrete logarithm} is an integer $k$, such that $b^k = a$
+			\item the \textbf{discrete logarithm} is an integer $k$, such that $b^k = a$
 		\end{itemize}
-	\end{block}
+	\end{definition}
 	\begin{block}{Notation}
 		\begin{itemize}
 			\item Let $\mathcal{G}$ be a function generating a group
@@ -28,8 +28,8 @@
 			\item The result of the experiment is $1$ if $g^i = h$, and $0$ otherwise.
 		\end{itemize}
 	\end{block}
-	\begin{block}{Defintion}
+	\begin{definition}
 		We say the \textbf{discrete logarithm problem is hard relative to} $\mathcal{G}$ if for all polynomial-time algorithms $\mathcal{A}$ there exists a negligible function $\textsf{negl}$ such that 
 			$$\Pr[DLog_{\mathcal{A}, \mathcal{G}}(n) = 1] \leq \textsf{negl}(n)$$
-	\end{block}
+	\end{definition}
 \end{frame}

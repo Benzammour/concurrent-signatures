@@ -1,5 +1,26 @@
 \documentclass{beamer}
 
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{calc,positioning,arrows,decorations.markings}
+\pgfplotsset{compat=1.14}
+
+% --------------------------------------------------------- x'ed out arrow
+\newcommand*{\StrikeThruDistance}{0.2cm}%
+\newcommand*{\StrikeThru}{\StrikeThruDistance,\StrikeThruDistance}%
+\tikzset{
+  strike thru arrow/.style={
+    decoration={
+      markings, mark=at position 0.5 with {
+        \draw [red, very thick, solid,-] ++ (-\StrikeThruDistance,-\StrikeThruDistance) -- ( \StrikeThruDistance, \StrikeThruDistance);
+        \draw [red, very thick, solid,-] ++ (-\StrikeThruDistance,\StrikeThruDistance) -- (\StrikeThruDistance, -\StrikeThruDistance);
+      }
+    },
+    postaction={decorate},
+  }
+}
+
+% --------------------------------------------------------- beamer/document setup
 \mode<presentation>
 
 \title{Concurrent Signatures}
@@ -25,6 +46,15 @@
   \end{frame}
 }
 
+\AtBeginSubsection[]
+{
+  \begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[currentsubsection]
+  \end{frame}
+}
+
+
 \begin{document}
 
 
@@ -38,11 +68,17 @@
 
 % --------------------------------------------------------- Introduction
 \section{Introduction}
-\input{sections/introduction.tex}
+\input{sections/introduction/main.tex}
+
+\subsection{Fair Signature Exchange}
+\input{sections/introduction/fse.tex}
+
+\subsection{Concurrent Approach}
+\input{sections/introduction/conapp.tex}
 
 % --------------------------------------------------------- Preliminaries
 \section{Preliminaries}
-\input{sections/preliminaries/main.tex}
+% \input{sections/preliminaries/main.tex}
 
 \subsection{Discrete Logarithm Assumption}
 \input{sections/preliminaries/dla.tex}
@@ -54,7 +90,7 @@
 \input{sections/preliminaries/signatures.tex}
 
 \subsection{Definitions}
-% \input{sections/preliminaries/definitions.tex}
+\input{sections/preliminaries/definitions.tex}
 
 
 % example in security model
