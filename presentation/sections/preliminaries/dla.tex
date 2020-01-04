@@ -4,7 +4,7 @@
 	\begin{block}{Definition (Discrete Logarithm)}
 		\begin{itemize}
 			\item Group $\mathbb{G}$ given
-			\item $b^k$ always defined in $\mathbb{G}$ through $b^k = \underbrace{b\cdot b \cdots b}_{k\text{ factors}}$
+			\item $b^k$ always defined in $\mathbb{G}$ through $b^k = \underbrace{b\cdot b \cdots b}_{k\text{ times}}$
 			\item the \textit{discrete logarithm} is an integer $k$, such that $b^k = a$
 		\end{itemize}
 	\end{block}
@@ -24,7 +24,7 @@
 		\begin{itemize}
 			\item Run $\mathcal{G}(1^n)$ to acquire $(\mathbb{G}, q, g)$ where $\mathbb{G}$ is a group, $q$ is its order (whereas $||q|| = n$) and $g\in \mathbb{G}$ is $\mathbb{G}$'s generator
 			\item Choose a random $h\in\mathbb{G}$
-			\item $\mathcal{A}$ is given $\mathbb{G}, q, g$ and $h$, and outputs $i\in \mathbb{Z}_p$
+			\item $\mathcal{A}$ is given $\mathbb{G}, q, g$ and $h$, and outputs $i\in \mathbb{Z}_p$ \textcolor{red}{define what $\mathbb{Z}_p$ is?}
 			\item The result of the experiment is $1$ if $g^i = h$, and $0$ otherwise.
 		\end{itemize}
 	\end{block}
