@@ -1,0 +1,35 @@
+\begin{frame}
+	\frametitle{Discrete Logarithmic Assumption}
+
+	\begin{definition}[discrete logarithm]
+		\begin{itemize}
+			\item Group $\mathbb{G}$ given
+			\item $b^k$ always defined in $\mathbb{G}$ through $b^k = \underbrace{b\cdot b \cdots b}_{k\text{ times}}$
+			\item the \textbf{discrete logarithm} is an integer $k$, such that $b^k = a$
+		\end{itemize}
+	\end{definition}
+	\begin{block}{Notation}
+		\begin{itemize}
+			\item Let $\mathcal{G}$ be a function generating a group
+			\item Let $\mathcal{A}$ be a given algorithm
+			\item Let $||\cdot||$ be the bit-length of a given integer
+		\end{itemize}
+	\end{block}
+	\textcolor{red}{include definition of a generator?}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Discrete Logarithmic Assumption}
+	\begin{block}{Discrete-Logarithm Experiment $DLog_{\mathcal{A}, \mathcal{G}}(n)$} % consider this experiment with
+		\begin{itemize}
+			\item Run $\mathcal{G}(1^n)$ to acquire $(\mathbb{G}, q, g)$ where $\mathbb{G}$ is a group, $q$ is its order (whereas $||q|| = n$) and $g\in \mathbb{G}$ is $\mathbb{G}$'s generator
+			\item Choose a random $h\in\mathbb{G}$
+			\item $\mathcal{A}$ is given $\mathbb{G}, q, g$ and $h$, and outputs $i\in \mathbb{Z}_p$ \textcolor{red}{define what $\mathbb{Z}_p$ is?}
+			\item The result of the experiment is $1$ if $g^i = h$, and $0$ otherwise.
+		\end{itemize}
+	\end{block}
+	\begin{definition}
+		We say the \textbf{discrete logarithm problem is hard relative to} $\mathcal{G}$ if for all polynomial-time algorithms $\mathcal{A}$ there exists a negligible function $\textsf{negl}$ such that 
+			$$\Pr[DLog_{\mathcal{A}, \mathcal{G}}(n) = 1] \leq \textsf{negl}(n)$$
+	\end{definition}
+\end{frame}
