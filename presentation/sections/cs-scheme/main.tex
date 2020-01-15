@@ -1,5 +1,31 @@
 \begin{frame}
 	\frametitle{Concurrent Signature Protocol}
 
-	pups
+	\begin{itemize}
+		\item Describing signature exchange between A(lice) and B(ob)
+		\item Initial signer has to generate keystone
+			\begin{itemize}
+				\item in our example: Alice 
+			\end{itemize}
+		\item Matching signer responds by using the same keystone-fix
+			\begin{itemize}
+				\item in our example: Bob
+			\end{itemize}
+		\item Alice and Bob both run \textbf{SETUP} to set public variables
+			\begin{itemize}
+				\item Alice's and Bob's public- and private keys are $X_A$, $x_a$ and $X_B$, $x_B$, respectively
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Concurrent Signature Protocol}
+
+	\textcolor{red}{TODO: choose concrete example in order to prove lemmata later on}
+	\begin{itemize}
+		\item Alice picks a random keystone $k\in\mathcal{K}$ and computes $h = \textbf{KGEN(k)}$
+		\item Alice then takes the message $M_A \in \mathcal{M}$ and computes her ambigous signature
+			$$\sigma_A := \goedel{s_A,h_A,h} = \textbf{ASIGN}(X_A, X_B, x_a, h, M_A)$$ % TODO: add \coloneqq package
+		\item $\ldots$
+	\end{itemize}
 \end{frame}
