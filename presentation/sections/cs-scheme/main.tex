@@ -4,16 +4,10 @@
 	\begin{itemize}
 		\item Describing signature exchange between A(lice) and B(ob)
 		\item Initial signer has to generate keystone
-			\begin{itemize}
-				\item in our example: Alice 
-			\end{itemize}
 		\item Matching signer responds by using the same keystone-fix
+		\item Alice and Bob both run \setup to set public variables
 			\begin{itemize}
-				\item in our example: Bob
-			\end{itemize}
-		\item Alice and Bob both run \textbf{SETUP} to set public variables
-			\begin{itemize}
-				\item Alice's and Bob's public- and private keys are $X_A$, $x_a$ and $X_B$, $x_B$, respectively
+				\item A's and B's public- and private keys are $X_A$, $x_a$ and $X_B$, $x_B$, respectively
 			\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -21,11 +15,27 @@
 \begin{frame}
 	\frametitle{Concurrent Signature Protocol}
 
-	\textcolor{red}{TODO: choose concrete example in order to prove lemmata later on}
-	\begin{itemize}
-		\item Alice picks a random keystone $k\in\mathcal{K}$ and computes $h = \textbf{KGEN(k)}$
-		\item Alice then takes the message $M_A \in \mathcal{M}$ and computes her ambigous signature
-			$$\sigma_A := \goedel{s_A,h_A,h} = \textbf{ASIGN}(X_A, X_B, x_a, h, M_A)$$ % TODO: add \coloneqq package
-		\item $\ldots$
-	\end{itemize}
+	\begin{enumerate}
+		\item A picks a random keystone $k\in\kspace$ and computes $f = \textbf{KGEN}(k)$
+		\item A computes ambiguous signature with $M_A \in \mespace$ being A's message 
+			$$\sigma_A \coloneqq \goedel{s_A,h_A,h} = \asign(X_A, X_B, x_A, f, M_A)$$ 
+		\item B verifies signature by checking
+			$$\averify(\goedel{s_A, h_A, f}, X_A, X_B, M_A) = accept$$
+			reject otherwise
+		\setcounter{ResumeEnumerate}{\value{enumi}}
+	\end{enumerate}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Concurrent Signature Protocol}
+
+	\begin{enumerate}[start=\numexpr\value{ResumeEnumerate}+1]
+		\item B picks message $M_B \in \mespace$ and creates own ambiguous signature
+		$$\sigma_B \coloneqq \goedel{s_B,h_B,h} = \asign(X_B, X_B, x_A, f, M_B)$$
+		\item A verifies this time with
+			$$\averify(\goedel{s_B, h_B, f}, X_B, X_A, M_B) = accept$$
+			with $f$ same keystone fix as before
+		\item A sends keystone to B
+	\end{enumerate}
 \end{frame}

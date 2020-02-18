@@ -1,9 +1,15 @@
 \documentclass{beamer}
 
+\usepackage{mathtools}
 \usepackage{tikz}
 \usepackage{pgfplots}
 \usetikzlibrary{calc,positioning,arrows,decorations.markings}
 \pgfplotsset{compat=1.14}
+
+% --------------------------------------------------------- continue number counter over multiple slides
+\usepackage{enumitem}
+\setenumerate[1]{label=\arabic*.}
+\newcounter{ResumeEnumerate}
 
 % --------------------------------------------------------- x'ed out arrow
 \newcommand*{\StrikeThruDistance}{0.2cm}%
@@ -22,8 +28,23 @@
 
 % --------------------------------------------------------- abbrev
 \newcommand{\goedel}[1]{\langle #1 \rangle}
+\newcommand{\nats}{\mathbb{N}}
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\ints}{\mathbb{Z}}
 
-% --------------------------------------------------------- beamer/document setup
+\newcommand{\setup}{\textbf{SETUP} }
+\newcommand{\asign}{\textbf{ASIGN} }
+\newcommand{\averify}{\textbf{AVERIFY} }
+\newcommand{\verify}{\textbf{VERIFY} }
+\newcommand{\keygen}{\textbf{KEYGEN}}
+
+\newcommand{\mespace}{\mathcal{M}}
+\newcommand{\sspace}{\mathcal{S}}
+\newcommand{\kspace}{\mathcal{K}}
+\newcommand{\kfspace}{\mathcal{F}}
+
+
+% --------------------------------------------------------- beamer/documeqqnt setup
 \mode<presentation>
 
 \title{Concurrent Signatures}
