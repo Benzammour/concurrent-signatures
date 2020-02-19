@@ -1,5 +1,5 @@
 \begin{frame}
-	\frametitle{Discrete Logarithmic Assumption}
+	\frametitle{Discrete Logarithmic Problem}
 
 	\begin{definition}[discrete logarithm]
 		\begin{itemize}
@@ -19,12 +19,12 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Discrete Logarithmic Assumption}
+	\frametitle{Discrete Logarithmic Problem}
 	\begin{block}{Discrete-Logarithm Experiment $DLog_{\mathcal{A}, \mathcal{G}}(n)$} % consider this experiment with
 		\begin{itemize}
-			\item Run $\mathcal{G}(1^n)$ to acquire $(\mathbb{G}, q, g)$ where $\mathbb{G}$ is a group, $q$ is its order (whereas $||q|| = n$) and $g\in \mathbb{G}$ is $\mathbb{G}$'s generator
+			\item Run $\mathcal{G}(1^n)$ to acquire $(\mathbb{G}, p, g)$ where $\mathbb{G}$ is a cyclic group, $p$ is its order (with $||p|| = n$) and $g\in \mathbb{G}$ is $\mathbb{G}$'s generator
 			\item Choose a random $h\in\mathbb{G}$
-			\item $\mathcal{A}$ is given $\mathbb{G}, q, g$ and $h$, and outputs $i\in \mathbb{Z}_p$ \textcolor{red}{define what $\mathbb{Z}_p$ is?}
+			\item $\mathcal{A}$ is given $\mathbb{G}, p, g$ and $h$, and outputs $i\in \ints_p$
 			\item The result of the experiment is $1$ if $g^i = h$, and $0$ otherwise.
 		\end{itemize}
 	\end{block}
