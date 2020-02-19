@@ -11,3 +11,57 @@
 		\end{itemize}
 	\end{definition}
 \end{frame}
+
+\begin{frame}
+	\frametitle{\setup}
+
+	\begin{itemize}
+		\item takes security parameter $\ell$
+		\item outputs descriptions of all relevant sets and keys
+		\item also function $\keygen: \kspace \to \kfspace$
+			\begin{itemize}
+				\item set of participants $\uspace$
+				\item message space $\mespace$
+				\item signature space $\sspace$
+				\item keystone space $\kspace$
+				\item keystone fix space $\kfspace$
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\asign}
+
+	\begin{itemize}
+		\item takes $\goedel{X_i, X_j, x_i, h_2, M}$ as parameter
+		\item outputs \textit{ambiguous} signature $\sigma = \goedel{s, h_1, h_2}$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\averify}
+
+	\begin{itemize}
+		\item takes $S = \goedel{\sigma, X_i, X_j, M}$ as parameter
+		\item $\sigma = \goedel{s, h_1, h_2}$ or  $\sigma = \goedel{s, h_2, h_1}$
+			\begin{itemize}
+				\item symmetric property of \averify
+			\end{itemize}
+		\item outputs accept or reject
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\verify}
+
+	\begin{itemize}
+		\item takes $\goedel{k, S}$ as parameter
+		\item $S=\goedel{\sigma, X_i, X_j, M}$
+		\item $\sigma = \goedel{s, h_1, h_2}$
+		\item checks $\keygen(k) \overset{?}{=} h_2$
+			\begin{itemize}
+				\item if so, run $\averify(S)$
+				\item otherwise, reject
+			\end{itemize}
+	\end{itemize}
+\end{frame}

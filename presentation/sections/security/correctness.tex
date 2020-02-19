@@ -1,5 +1,12 @@
 \begin{frame}
 	\frametitle{Correctness}
 
-	Conc-Sign-Scheme is correct if $\sigma=\goedel{s,h_1,h}=\textbf{ASIGN}(X_i, X_j,x_i,h,M)$ and $S=\goedel{\sigma, X_i, X_j,M}$ then AVERIFY(S) = accept. Further, if KGEN(k) = f for some $k\in\mathcal{K}$ then VERIFY(k,S) = accept. 
+	\begin{itemize}
+		\item $\sigma\coloneqq\goedel{s,h_1,h}=\textbf{ASIGN}(X_i, X_j,x_i,h,M)$
+		\item $S=\goedel{\sigma, X_i, X_j,M}$
+			\begin{itemize}
+				\item then $\averify(S) = accept$
+			\end{itemize} 
+		\item $\keygen(k) = f$ for some $k\in\kspace$ then $\verify(k,S) = accept$
+	\end{itemize}
 \end{frame}
