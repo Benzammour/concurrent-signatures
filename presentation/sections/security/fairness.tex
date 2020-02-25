@@ -1,3 +1,19 @@
 \begin{frame}
 	\frametitle{Fairness}
+
+	\begin{itemize}
+		\item \textbf{SETUP}, \textbf{KGen}, \textbf{KReveal}, \textbf{ASign} and \textbf{Private Key Extraction} Queries as in Ambiguity
+		\item adversary $E$ outputs $S=\goedel{\underbrace{\goedel{s, h_1, f}}_{\eqqcolon\sigma},X_c, X_d, M}$
+		\item Further $\averify(S)=accept$
+		\item $E$ wins if one of the following holds
+			\begin{itemize}
+				\item $f$ was previous output from \keygen, no \textbf{KReveal} query was made and $\goedel{k, S}$ is accepted by \verify
+				\item $E$ outputs $\goedel{\sigma',X_d, X_c, M'}$ with $\sigma' = \goedel{s', h_1', f}$ 
+					\begin{itemize}
+						\item $\averify(S') = accept$
+						\item $\verify(\goedel{k,S}) = accept$
+						\item $\verify(\goedel{k,S'}) = reject$
+					\end{itemize}
+			\end{itemize}
+	\end{itemize}
 \end{frame}
