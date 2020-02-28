@@ -8,14 +8,11 @@
 			\item the \textbf{discrete logarithm} is an integer $k$, such that $b^k = a$
 		\end{itemize}
 	\end{definition}
-	\begin{block}{Notation}
-		\begin{itemize}
-			\item Let $\mathcal{G}$ be a function generating a group
-			\item Let $\mathcal{A}$ be a given algorithm
-			\item Let $||\cdot||$ be the bit-length of a given integer
-		\end{itemize}
-	\end{block}
-	\textcolor{red}{include definition of a generator?}
+	%  
+	\begin{definition}[group generator]
+		Let $\mathbb{G}$ be a cyclic group of order $p$. Then $g\in\mathbb{G}$ is generator of $\mathbb{G}$ if
+			$$\mathbb{G} = \{g^i \bmod p \mid i \in \nats \}$$
+	\end{definition}
 \end{frame}
 
 \begin{frame}

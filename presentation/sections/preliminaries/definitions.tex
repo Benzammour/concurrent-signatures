@@ -10,6 +10,12 @@
 			\item \verify
 		\end{itemize}
 	\end{definition}
+
+	\begin{block}{Notation}
+		\begin{itemize}
+			\item Let $k$ denote the \textit{keystone}
+		\end{itemize}
+	\end{block}
 \end{frame}
 
 \begin{frame}
@@ -18,7 +24,6 @@
 	\begin{itemize}
 		\item takes security parameter $\ell$
 		\item outputs descriptions of all relevant sets and keys
-		\item also function $\keygen: \kspace \to \kfspace$
 			\begin{itemize}
 				\item set of participants $\uspace$
 				\item message space $\mespace$
@@ -26,11 +31,18 @@
 				\item keystone space $\kspace$
 				\item keystone fix space $\kfspace$
 			\end{itemize}
+		\item function $\keygen: \kspace \to \kfspace$
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
 	\frametitle{\asign}
+
+	\begin{center}	
+		\begin{tikzpicture}
+			\node[draw,minimum size=2cm] (a) {tst};
+		\end{tikzpicture}
+	\end{center}
 
 	\begin{itemize}
 		\item takes $\goedel{X_i, X_j, x_i, h_2, M}$ as parameter
