@@ -1,17 +1,104 @@
 \begin{frame}
 	\frametitle{Introduction}
-
 	\begin{itemize}
 		\setlength\itemsep{1em}
 		\item<1-> What is a Fair Signature Exchange?
-			\begin{itemize}
-				\item<2-> Why is that important?
-				\item<3-> Which approaches already exist?
-			\end{itemize}
-		\item<4-> What does this approach do?
-			\begin{itemize}
-				\item<5-> Is \textit{truly fair} exchange necessary?
-				\item<6-> What are advantages?
-			\end{itemize}
+		\item<2-> Why is that important?
+		\item[] \phantom{Which approaches already exist?}
+		\item[] \phantom{Is \textit{truly fair} exchange necessary?}
+	\end{itemize}
+\end{frame}
+
+% --------------------------------------------------------- Fair Signature Exchange Example
+\begin{frame}
+	\frametitle{Fair Signature Exchange (Example)}
+
+	\begin{itemize}
+		\setlength\itemsep{1em}
+		\item<1-> Two parties Alice and Bob
+		\item<2-> Want to sign an item (e.g. a contract)\vspace*{.5cm}
+		\item[]<3-> 
+			\begin{center}			
+				\begin{tikzpicture}[node distance=2cm,auto,>=stealth']
+					\node[] (bob) {Bob};
+					\node[left = of bob] (alice) {Alice};
+					\node[below of=bob, node distance=3cm] (bobground) {};
+					\node[below of=alice, node distance=3cm] (aliceground) {};
+					
+					% vertical lines
+					\draw (alice) -- (aliceground);
+					\draw (bob) -- (bobground);
+
+					% signs contract -> receives signed contract
+					% \draw[->, dashed] ($(alice)!0.2!(aliceground)$) -- node[left, scale=1, pos=-.02]{signs contract} ($(bob)!0.25!(bobground)$);
+					% \draw($(bob)!0.25!(bobground)$) -- node[right, scale=1, xshift=0.1cm]{receives signed contract} ($(bob)!0.25!(bobground)$);
+				\end{tikzpicture}
+			\end{center}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Fair Signature Exchange (Example)}
+
+	\begin{itemize}
+		\setlength\itemsep{1em}
+		\item Two parties Alice and Bob
+		\item Want to sign an item (e.g. a contract)\vspace*{.5cm}
+		\item[]
+			\begin{center}			
+				\begin{tikzpicture}[node distance=2cm,auto,>=stealth']
+					\node[] (bob) {Bob};
+					\node[left = of bob] (alice) {Alice};
+					\node[below of=bob, node distance=3cm] (bobground) {};
+					\node[below of=alice, node distance=3cm] (aliceground) {};
+					
+					% vertical lines
+					\draw (alice) -- (aliceground);
+					\draw (bob) -- (bobground);
+
+					% signs contract -> receives signed contract
+					\draw[->, dashed] ($(alice)!0.2!(aliceground)$) -- node[above, scale=0.6, sloped]{signs contract} ($(bob)!0.25!(bobground)$);
+					% \draw($(bob)!0.25!(bobground)$) -- node[right, scale=1, xshift=0.1cm]{receives signed contract} ($(bob)!0.25!(bobground)$);
+				\end{tikzpicture}
+			\end{center}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Fair Signature Exchange (Example)}
+
+	\begin{itemize}
+		\setlength\itemsep{1em}
+		\item Two parties Alice and Bob
+		\item Want to sign an item (e.g. a contract)\vspace*{.5cm}
+		\item[]
+			\begin{center}			
+				\begin{tikzpicture}[node distance=2cm,auto,>=stealth']
+					\node[] (bob) {Bob};
+					\node[left = of bob] (alice) {Alice};
+					\node[below of=bob, node distance=3cm] (bobground) {};
+					\node[below of=alice, node distance=3cm] (aliceground) {};
+					
+					% vertical lines
+					\draw (alice) -- (aliceground);
+					\draw (bob) -- (bobground);
+
+					% signs contract -> receives signed contract
+					\draw[->, dashed] ($(alice)!0.2!(aliceground)$) -- node[above, scale=0.6, sloped]{signs contract} ($(bob)!0.25!(bobground)$);
+					\draw[->, strike thru arrow, dashed] ($(bob)!0.5!(bobground)$) -- ($(alice)!0.6!(aliceground)$);
+				\end{tikzpicture}
+			\end{center}
+	\end{itemize}
+\end{frame}
+
+% --------------------------------------------------------- continuation of slides
+\begin{frame}
+	\frametitle{Introduction}
+	\begin{itemize}
+		\setlength\itemsep{1em}
+		\item<1-> What is a Fair Signature Exchange?
+		\item<1-> Why is that important?
+		\item<1-> Which approaches already exist?
+		\item<2-> Is \textit{truly fair} exchange necessary?
 	\end{itemize}
 \end{frame}

@@ -40,40 +40,58 @@
 
 	\begin{center}	
 		\begin{tikzpicture}
-			\node[draw,minimum size=2cm] (a) {tst};
+			\node[draw,minimum size=2.5cm] (asign) {\asign};
+
+			\draw[<-] (asign.140) -- ++(180:0.5cm) node [left] {\phantom{$\sigma=\goedel{s, h_1, h_2}$}$X_i$};
+			\draw[<-] (asign.180) -- ++(180:0.5cm) node [left] {$X_j$};
+			\draw[<-] (asign.220) -- ++(180:0.5cm) node [left] {$x_i$};
+			\draw[<-] (asign.north) -- ++(90:0.5cm) node [above] {$M$};
+			\draw[<-] (asign.south) -- ++(-90:0.5cm) node [below] {$h_2$};
+
+			\draw[->] (asign.east) -- ++(0:0.5cm) node [right] {$\sigma = \goedel{s, h_1, h_2}$};
 		\end{tikzpicture}
 	\end{center}
 
-	\begin{itemize}
-		\item takes $\goedel{X_i, X_j, x_i, h_2, M}$ as parameter
-		\item outputs \textit{ambiguous} signature $\sigma = \goedel{s, h_1, h_2}$
-	\end{itemize}
+	\textcolor{blue}{\small introduce everything slide-by-slide}
 \end{frame}
 
 \begin{frame}
 	\frametitle{\averify}
 
-	\begin{itemize}
-		\item takes $S = \goedel{\sigma, X_i, X_j, M}$ as parameter
-		\item $\sigma = \goedel{s, h_1, h_2}$ or  $\sigma = \goedel{s, h_2, h_1}$
-			\begin{itemize}
-				\item symmetric property of \averify
-			\end{itemize}
-		\item outputs accept or reject
-	\end{itemize}
+	\begin{center}	
+		\begin{tikzpicture}
+			\node[draw,minimum size=2.5cm] (asign) {\averify};
+
+			\draw[<-] (asign.140) -- ++(180:0.5cm) node [left] {$X_i$};
+			\draw[<-] (asign.180) -- ++(180:0.5cm) node [left] {$X_j$};
+			\draw[<-] (asign.220) -- ++(180:0.5cm) node [left] {$\sigma = \goedel{s, h_1, h_2}$};
+			\draw[<-] (asign.north) -- ++(90:0.5cm) node [above] {$M$};
+
+			\draw[->] (asign.east) -- ++(0:0.5cm) node [right] {$accept/reject$};
+		\end{tikzpicture}
+	\end{center}
+
+	\textcolor{blue}{\small mention symmetric property in talk}
 \end{frame}
 
 \begin{frame}
 	\frametitle{\verify}
 
+	\begin{center}	
+		\begin{tikzpicture}
+			\node[draw,minimum size=2.5cm] (asign) {\averify};
+
+			\draw[<-] (asign.west) -- ++(180:0.5cm) node [left] {$\goedel{k,S}$};
+			\draw[->] (asign.east) -- ++(0:0.5cm) node [right] {$accept/reject$};
+		\end{tikzpicture}
+	\end{center}
+
 	\begin{itemize}
-		\item takes $\goedel{k, S}$ as parameter
-		\item $S=\goedel{\sigma, X_i, X_j, M}$
-		\item $\sigma = \goedel{s, h_1, h_2}$
 		\item checks $\keygen(k) \overset{?}{=} h_2$
 			\begin{itemize}
 				\item if so, run $\averify(S)$
 				\item otherwise, reject
 			\end{itemize}
 	\end{itemize}
+	\textcolor{blue}{\small explain/show on sec. slides what $S$ contains; \keygen ~check into own box (nested)}
 \end{frame}
