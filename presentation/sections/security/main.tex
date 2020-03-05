@@ -1,7 +1,8 @@
 \begin{frame}
 	\frametitle{Security Model}
 
-	\begin{itemize}
+	\begin{itemize}[<+->]
+		\setlength\itemsep{1em}
 		\item Security is formalized through different key aspects.
 		\item e.g. in Ring Signatures one property is ambiguity
 		\item we formalize security through
@@ -11,4 +12,25 @@
 				\item Fairness
 			\end{itemize}
 	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Security Model}
+
+	\begin{itemize}[<+->]
+		\setlength\itemsep{1em}
+		\item consider adversary $E$ and challenger $C$
+		\item $C$ runs \setup
+		\item $E$ acquires all public variables, $C$ retains all $x_i$
+		\item $E$ can request\\[.2cm]
+			$\left.\parbox{.5\textwidth}{%
+			\begin{itemize}
+				\item<4-> \textbf{KGen\ldots}
+				\item<4-> \textbf{KReveal\ldots}
+				\item<4-> \textbf{ASign\ldots} 
+				\item<4-> \textbf{AVerify / Verify\ldots}
+				\item<4-> \textbf{Private Key Extraction\ldots}
+			\end{itemize}%
+			}\right\}\text{\ldots Queries from } C$
+		\end{itemize}
 \end{frame}

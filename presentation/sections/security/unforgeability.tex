@@ -1,20 +1,11 @@
 \begin{frame}
 	\frametitle{Unforgeability}
 
-	\begin{itemize}
-		\item consider adversary $E$ and challenger $C$
-		\item $C$ runs \setup
-		\item $E$ acquires all public variables, $C$ retains all $x_i$
-		\item $E$ can request\\[.2cm]
-			$\left.\parbox{.5\textwidth}{%
-			\begin{itemize}
-				\item \textbf{KGen\ldots}
-				\item \textbf{KReveal\ldots}
-				\item \textbf{ASign\ldots} 
-				\item \textbf{AVerify / Verify\ldots}
-				\item \textbf{Private Key Extraction\ldots}
-			\end{itemize}%
-			}\right\}\text{\ldots Queries from } C$
-		\item $E$ wins if $\averify(\sigma, X_c, X_d, M) = accept$ and no Private Key Extraction Query was made
+	\begin{itemize}[<+->]
+		\setlength\itemsep{1em}
+		\item consider Adversary-Challenger Game
+		\item $C$ answers to Queries as mentioned
+		\item $E$ outputs tuple $S = (\sigma, X_c, X_d, M)$ 
+		\item $E$ wins if $\averify(S) = accept$ and no Private Key Extraction Query was made
 		\end{itemize}
 \end{frame}

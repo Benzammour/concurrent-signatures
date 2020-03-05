@@ -3,18 +3,25 @@
 \usepackage{mathtools}
 \usepackage{tikz}
 \usepackage{pgfplots}
-\usetikzlibrary{calc,positioning,arrows,decorations.markings}
+\usetikzlibrary{
+  calc,
+  positioning,
+  arrows,
+  decorations.markings,
+  shapes.multipart,
+  fit
+}
 \pgfplotsset{compat=1.14}
 
 % --------------------------------------------------------- continue number counter over multiple slides
-\usepackage{enumitem}
-\setenumerate[1]{label=\arabic*.}
+% \usepackage{enumitem}
+% \setenumerate[1]{label=\arabic*.}
 
-\setitemize{label=\usebeamerfont*{itemize item}%
-  \usebeamercolor[fg]{itemize item}
-  \usebeamertemplate{itemize item}}
+% \setitemize{label=\usebeamerfont*{itemize item}%
+%   \usebeamercolor[fg]{itemize item}
+%   \usebeamertemplate{itemize item}}
 
-\newcounter{ResumeEnumerate}
+% \newcounter{ResumeEnumerate}
 
 % --------------------------------------------------------- x'ed out arrow
 \newcommand*{\StrikeThruDistance}{0.2cm}%
@@ -77,14 +84,6 @@
   \end{frame}
 }
 
-% \AtBeginSubsection[]
-% {
-%   \begin{frame}
-%     \frametitle{Outline}
-%     \tableofcontents[currentsubsection]
-%   \end{frame}
-% }
-
 \begin{document}
 
 
@@ -118,7 +117,7 @@
 
 % --------------------------------------------------------- Concurrent Signature Protocol
 \section{Concurrent Signature Protocol}
-\input{sections/cs-scheme/main.tex}
+\input{sections/concurrent/main.tex}
 
 % --------------------------------------------------------- Security Model
 \section{Security Model}
@@ -134,8 +133,8 @@
 \input{sections/security/fairness.tex}
 
 % --------------------------------------------------------- Proof of Lemmata
-\section{Proofs}
-\input{sections/proofs.tex}
+\section{Concrete Scheme}
+\input{sections/concrete-scheme/main.tex}
 
 % --------------------------------------------------------- Conclusion
 \section{Conclusion}

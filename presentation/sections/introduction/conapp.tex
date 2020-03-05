@@ -1,14 +1,14 @@
 \begin{frame}
 	\frametitle{Concurrent Approach}
 	
-	\begin{itemize}
+	\begin{itemize}[<+->]
 		\setlength\itemsep{1em}
-		\item<1-> A creates \textit{ambiguous} signature with random bits and B's public key
-		\item<2-> A chooses those random bits $h_k$ through a hash function
-		\item<3-> B creates its own ambiguous signature with $h_k$ and A's public key
-		\item<4-> Until input of hash function is released both signatures stay ambiguous  
+		\item A creates \textit{ambiguous} signature with random bits and B's public key
+		\item A chooses those random bits through a hash function
+		\item B creates its own ambiguous signature with those bits and A's public key
+		\item Until input of hash function is released both signatures stay ambiguous
 			\begin{itemize}
-				\item \textit{keystone} $k$
+				\item denoted as: \textit{keystone}
 			\end{itemize}
 	\end{itemize}
 \end{frame}

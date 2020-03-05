@@ -1,0 +1,43 @@
+\begin{frame}
+	\frametitle{Concrete Scheme}
+
+	\begin{itemize}[<+->]
+		\item based on Ring Signatures
+			\begin{itemize}
+				\item in turn based on: Schnorr Signatures
+			\end{itemize}
+		\item \setup 
+		\begin{itemize}
+			\item outputs two large primes $p$ and $q$ with $q \mid p-1$
+			\item $p$, $q$ published with $g\in(\ints/p\ints)^\ast$
+			\item $\sspace \equiv \kfspace = \ints_q$ and $\mespace \equiv \kspace = \{0,1\}^\ast$
+			\item $H_1$, $H_2: \{0,1\}^\ast \to \ints_q$ cryptographic hash functions 
+			\item $\keygen \coloneqq H_1$
+			\item private keys chosen uniformly from $\ints_q$
+			\item public keys $X_i = g^{x_i} \bmod p$ published
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Lemmas}
+
+	\begin{lemma}[Fairness]
+		The concurrent signature scheme in our example is fair in the random oracle model
+	\end{lemma}
+
+	\begin{lemma}[Ambiguity]
+		The concurrent signature scheme in our example is ambiguos in the random oracle model
+	\end{lemma}	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Lemmas}
+
+	\begin{lemma}[Unforgeability]
+		The concurrent signature scheme in our example is existentially unforgeable under a chosen message attack in the random oracle model, assuming the hardness of the discrete logarithm problem
+	\end{lemma}	
+	\begin{proof}
+		lalala
+	\end{proof}
+\end{frame}

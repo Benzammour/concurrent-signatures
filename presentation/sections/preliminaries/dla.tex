@@ -1,7 +1,7 @@
 \begin{frame}
 	\frametitle{Discrete Logarithmic Problem}
 
-	\begin{definition}[discrete logarithm]
+	\begin{definition}[discrete logarithm]<1->
 		\begin{itemize}
 			\item Group $\mathbb{G}$ given
 			\item $b^k$ always defined in $\mathbb{G}$ through $b^k = \underbrace{b\cdot b \cdots b}_{k\text{ times}}$
@@ -9,7 +9,7 @@
 		\end{itemize}
 	\end{definition}
 	%  
-	\begin{definition}[group generator]
+	\begin{definition}[group generator]<2->
 		Let $\mathbb{G}$ be a cyclic group of order $p$. Then $g\in\mathbb{G}$ is generator of $\mathbb{G}$ if
 			$$\mathbb{G} = \{g^i \bmod p \mid i \in \nats \}$$
 	\end{definition}
@@ -17,7 +17,7 @@
 
 \begin{frame}
 	\frametitle{Discrete Logarithmic Problem}
-	\begin{block}{Discrete-Logarithm Experiment $DLog_{\mathcal{A}, \mathcal{G}}(n)$} % consider this experiment with
+	\begin{block}{Discrete-Logarithm Experiment $DLog_{\mathcal{A}, \mathcal{G}}(n)$}<1->
 		\begin{itemize}
 			\item Run $\mathcal{G}(1^n)$ to acquire $(\mathbb{G}, p, g)$ where $\mathbb{G}$ is a cyclic group, $p$ is its order (with $||p|| = n$) and $g\in \mathbb{G}$ is $\mathbb{G}$'s generator
 			\item Choose a random $h\in\mathbb{G}$
@@ -25,7 +25,7 @@
 			\item The result of the experiment is $1$ if $g^i = h$, and $0$ otherwise.
 		\end{itemize}
 	\end{block}
-	\begin{definition}
+	\begin{definition}<2->
 		We say the \textbf{discrete logarithm problem is hard relative to} $\mathcal{G}$ if for all polynomial-time algorithms $\mathcal{A}$ there exists a negligible function $\textsf{negl}$ such that 
 			$$\Pr[DLog_{\mathcal{A}, \mathcal{G}}(n) = 1] \leq \textsf{negl}(n)$$
 	\end{definition}

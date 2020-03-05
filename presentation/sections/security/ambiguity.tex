@@ -1,7 +1,12 @@
 \begin{frame}
 	\frametitle{Ambiguity}
 
-	\begin{itemize}
-		\item adversary $E$ and challenger $C$
+	\begin{itemize}[<+->]
+		\setlength\itemsep{1em}
+		\item game consisting of query phases and a challenge
+		\item \textbf{Phase 1:} first round of queries from $E$ to $C$
+		\item \textbf{Challenge:} $E$ selects tuple, $C$ outputs challenge bit $b$
+		\item \textbf{Phase 2:} second round of queries from $E$ to $C$
+		\item $E$ guesses challenge bit with $b^\prime$; $E$ wins if $b=b^\prime$ 
 	\end{itemize}
 \end{frame}
