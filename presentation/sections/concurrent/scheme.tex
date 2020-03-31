@@ -1,0 +1,121 @@
+\begin{frame}
+	\frametitle{Concurrent Scheme}
+
+	\begin{definition}[Concurrent Signature Scheme]
+		A \textbf{concurrent signature scheme} is a digital signature scheme, that holds the following algorithms
+		\begin{itemize}
+			\item \setup
+			\item \asign
+			\item \averify
+			\item \verify
+		\end{itemize}
+	\end{definition}
+
+	\begin{block}{Notation}
+		\begin{itemize}
+			\item Let $k$ denote the \textit{keystone}
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\setup}
+
+	\begin{itemize}
+		\item takes security parameter $\ell$
+		\item outputs descriptions of all relevant sets and keys
+			\begin{itemize}
+				\item set of participants $\uspace$
+				\item message space $\mespace$
+				\item signature space $\sspace$
+				\item keystone space $\kspace$
+				\item keystone fix space $\kfspace$
+			\end{itemize}
+		\item function $\keygen: \kspace \to \kfspace$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\asign}
+
+	\begin{center}	
+		\begin{tikzpicture}
+			\node[draw,minimum size=2.5cm] (asign) {\asign};
+
+			\draw[<-] (asign.140) -- ++(180:0.5cm) node [left] {\phantom{$\sigma=\goedel{s, h_1, h_2}$}$X_i$};
+			\draw[<-] (asign.180) -- ++(180:0.5cm) node [left] {$X_j$};
+			\draw[<-] (asign.220) -- ++(180:0.5cm) node [left] {$x_i$};
+			\draw[<-] (asign.north) -- ++(90:0.5cm) node [above] {$M$};
+			\draw[<-] (asign.south) -- ++(-90:0.5cm) node [below] {$h_2$};
+
+			\draw[->] (asign.east) -- ++(0:0.5cm) node [right] {$\sigma = \goedel{s, h_1, h_2}$};
+		\end{tikzpicture}
+	\end{center}
+
+	\textcolor{blue}{\small introduce everything slide-by-slide}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\averify}
+
+	\begin{center}	
+		\begin{tikzpicture}
+			\node[draw,minimum size=2.5cm] (asign) {\averify};
+
+			\draw[<-] (asign.140) -- ++(180:0.5cm) node [left] {$X_i$};
+			\draw[<-] (asign.180) -- ++(180:0.5cm) node [left] {$X_j$};
+			\draw[<-] (asign.220) -- ++(180:0.5cm) node [left] (sigma) {$\sigma = \goedel{s, h_1, h_2}$};
+			\draw[<-] (asign.north) -- ++(90:0.5cm) node [above] (message) {$M$};
+
+			\draw[->] (asign.east) -- ++(0:0.5cm) node [right] {$accept/reject$};
+
+			\path (message.north) -- (sigma.south) 
+				node[midway, sloped, draw, ellipse, dotted, fit=(message.north east)(sigma.south west), inner sep=.5pt]{};
+		\end{tikzpicture}
+	\end{center}
+
+	\textcolor{blue}{\small mention symmetric property in talk}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\verify}
+
+	\begin{center}
+		\resizebox{.9\hsize}{!}{
+			\begin{tikzpicture}[custom/.style = {rectangle, draw, align=center, inner xsep=3mm, inner ysep=3mm}, -latex]
+				% nodes
+				\node[custom] (kgen) {$\keygen(k) \overset{?}{=} h_2$};
+				\node[custom, right=1cm of kgen.east] (averify) {$\averify(S)$};
+				\node[fit={(kgen) (averify)}, draw, inner xsep=5mm, inner ysep=5mm, label={\verify}] (outer) {};
+				
+				\node[left=.75cm of outer.west] (input) {$\goedel{k,S}$};
+				\node[right=1cm of averify.east] (output1) {$accept/reject$};
+				\node[below=1cm of output1.south] (output2) {$reject$};
+
+				% connections
+				\draw (input.east) to (kgen.west);
+				\draw (kgen.east) -- node[above, scale=0.6]{$true$} (averify.west);
+				\draw (averify.east) to (output1.west);
+				\draw  (kgen.south) |- node[left, scale=0.6, yshift=.5cm]{$false$} (output2.west);
+			\end{tikzpicture}
+		}
+	\end{center}
+
+	\textcolor{blue}{\small explain/show on sec. slides what $S$ contains}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Algorithm Synergy}
+
+	\resizebox{.9\hsize}{!}{
+		\begin{tikzpicture}[custom/.style = {rectangle, draw, align=center, inner xsep=3mm, inner ysep=3mm}, -latex]
+			\node[custom] (asign) {\averify};
+			\node[custom, below=1cm of asign] (verify) {$\verify(S)$};
+			\node[custom, above left=.1cm of verify] (verify) {H};
+		\end{tikzpicture}
+	}
+
+	\textcolor{blue}{TODO: add verification, signing, oracle/hash function synergy graph}
+
+\end{frame}

@@ -8,9 +8,10 @@
   positioning,
   arrows,
   decorations.markings,
-  shapes.multipart,
+  shapes,
   fit
 }
+\tikzset{>=latex}
 \pgfplotsset{compat=1.14}
 
 % --------------------------------------------------------- continue number counter over multiple slides
@@ -104,7 +105,6 @@
 
 % --------------------------------------------------------- Preliminaries
 \section{Preliminaries}
-% \input{sections/preliminaries/main.tex}
 
 \subsection{Discrete Logarithm Assumption}
 \input{sections/preliminaries/dla.tex}
@@ -117,7 +117,12 @@
 
 % --------------------------------------------------------- Concurrent Signature Protocol
 \section{Concurrent Signature Protocol}
-\input{sections/concurrent/main.tex}
+
+\subsection{Scheme}
+\input{sections/concurrent/scheme.tex}
+
+\subsection{Protocol}
+\input{sections/concurrent/protocol.tex}
 
 % --------------------------------------------------------- Security Model
 \section{Security Model}
