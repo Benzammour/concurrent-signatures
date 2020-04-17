@@ -1,0 +1,135 @@
+\begin{frame}
+	\frametitle{Unforgeability - Proof}
+	
+	\textit{Proof Idea:}
+	\begin{enumerate}[<+->]
+		\item Assumption: hardness of the discrete logarithm
+		\item Proof by contraposition: Scheme is forgeable with an non-neglible probability
+		\item Create system, that uses the adversary to solve the discrete logarithm problem
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Proof - Setup}
+
+	\begin{itemize}[<+->]
+		\item need signature format $\goedel{r_1, h, r_2}$
+		\begin{itemize}
+			\item easily deriviable from $\sigma = \goedel{s, h_1, h_2}$
+		\end{itemize}
+		\item $H_1, H_2$ random oracles
+		\item $E$ is forging-adversary
+		\item $\mathcal{A}$ is an algorithm that solves the discrete logarithm problem
+			\begin{itemize}
+				\item simulates random oracles and challenger $C$
+				\item input: $\goedel{g, X, p , q}$
+				\item goal: find $x\in\ints_q$ s.t. $g^x = X \bmod p$
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Proof - Simulation}
+
+	\begin{center}
+		\resizebox{\hsize}{!}{
+			\begin{tikzpicture}[custom/.style = {rectangle, draw, align=center, minimum width=1.5cm, inner xsep=3mm, inner ysep=3mm}, -latex]
+				% nodes
+				\visible<3->{\node[custom] (adversary) {$E$};}
+				\visible<4->{\node[above=.75cm of adversary] (adversary_input) {$\goedel{g, p, q}$};}
+				\phantom{\node[below=.75cm of adversary, align=center] (forged_signature) {$\sigma = \goedel{s, h_1, f}$, \\ $X_c, X_d, M$};}
+
+				\visible<5->{\node[custom, right=.75cm of adversary_input] (participants) {$\mathcal{U}$};}
+				\visible<5->{\node[custom, right=.75cm of participants] (priv_keys) {$x_i$};}
+				
+				\visible<6->{\node[custom, right=.75cm of adversary] (pub_keys) {$X_i {\visible<7->{= g^{x_i} \bmod p}}$};}
+				
+				\visible<1->{\node[fit={(adversary_input) (priv_keys) (forged_signature)}, draw, outer ysep=2mm, inner xsep=5mm, inner ysep=5mm, label={\Large$\mathcal{A}$}] (outer_box) {};}
+				\visible<2->{\node[left=.5cm of outer_box.west] (input) {$\goedel{g, X, p, q}$};}
+				
+				% connections
+				\visible<2->{\draw (input.east) to (outer_box.west);}
+				\visible<4->{\draw (adversary_input.south) to (adversary.north);}
+				\visible<8->{\draw (pub_keys.west) to (adversary.east);}
+				\phantom{\draw (adversary.south) to (forged_signature.north);}
+			\end{tikzpicture}
+		}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Proof - Simulation}
+
+	\begin{itemize}
+		\item $H_1, H_2$\textbf{-Queries}
+		\item \textbf{KGen-Queries}
+		\item \textbf{KReveal-Queries}
+		\item \textbf{ASign-Queries} 
+		\item \textbf{Private Key Extraction-Queries}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Proof - Simulation}
+
+	\begin{center}
+		\resizebox{\hsize}{!}{
+			\begin{tikzpicture}[custom/.style = {rectangle, draw, align=center, minimum width=1.5cm, inner xsep=3mm, inner ysep=3mm}, -latex]
+				% nodes
+				\visible<1->{\node[custom] (adversary) {$E$};}
+				\visible<1->{\node[above=.75cm of adversary] (adversary_input) {$\goedel{g, p, q}$};}
+				\visible<2->{\node[below=.75cm of adversary, align=center] (forged_signature) {$\sigma = \goedel{s, h_1, f}$, \\ $X_c, X_d, M$};}
+
+				\visible<1->{\node[custom, right=.75cm of adversary_input] (participants) {$\mathcal{U}$};}
+				\visible<1->{\node[custom, right=.75cm of participants] (priv_keys) {$x_i$};}
+				
+				\visible<1->{\node[custom, right=.75cm of adversary] (pub_keys) {$X_i = g^{x_i} \bmod p$};}
+				
+				\visible<1->{\node[fit={(adversary_input) (priv_keys) (forged_signature)}, draw, outer ysep=2mm, inner xsep=5mm, inner ysep=5mm, label={\Large$\mathcal{A}$}] (outer_box) {};}
+				\visible<1->{\node[left=.5cm of outer_box.west] (input) {$\goedel{g, X, p, q}$};}
+				
+				% connections
+				\visible<1->{\draw (input.east) to (outer_box.west);}
+				\visible<1->{\draw (adversary_input.south) to (adversary.north);}
+				\visible<1->{\draw (pub_keys.west) to (adversary.east);}
+				\visible<2->{\draw (adversary.south) to (forged_signature.north);}
+			\end{tikzpicture}
+		}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Proof - Simulation}
+
+	With valid signature, one of the following holds
+	\begin{itemize}
+		\item No \asign query with $\goedel{X_c, X_d, f, M}$, and no \textbf{Private Key Extraction} query for $X_c$ or $X_d$ 
+		\item No \asign query with $\goedel{X_c, X_i, f, M}$, no \textbf{Private Key Extraction} query for $X_c$, and
+			\begin{itemize}
+				\item $f$ output from previous \keygen query or
+				\item $E$ produces keystone $k$ such that $f = \keygen(k)$
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Proof - Simulation}
+
+	\begin{itemize}
+		\item if $X_c \neq X_\alpha$, $\mathcal{A}$ aborts because it's lost
+		\item Therefore assume: $X_c = X_\alpha = X$
+		\item with second case we have:
+			$$h = h_1 + f = H_2(g^s X_{c}^{h_1} X_d^f \bmod p ~\|~ M)$$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Proof - Simulation}
+
+	Case 1: $h = h_1 + f$ never appeared in previous signature query
+
+	\begin{itemize}
+		\item force $E$ to rerun simulation to produce $(r_1, h', r_2')$ with $h \neq h'$
+	\end{itemize}
+
+\end{frame}

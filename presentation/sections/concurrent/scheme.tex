@@ -40,19 +40,19 @@
 
 	\begin{center}	
 		\begin{tikzpicture}
-			\node[draw,minimum size=2.5cm] (asign) {\asign};
+			\visible<1->{\node[draw,minimum size=2.5cm] (asign) {\asign};}
 
-			\draw[<-] (asign.140) -- ++(180:0.5cm) node [left] {\phantom{$\sigma=\goedel{s, h_1, h_2}$}$X_i$};
-			\draw[<-] (asign.180) -- ++(180:0.5cm) node [left] {$X_j$};
-			\draw[<-] (asign.220) -- ++(180:0.5cm) node [left] {$x_i$};
-			\draw[<-] (asign.north) -- ++(90:0.5cm) node [above] {$M$};
-			\draw[<-] (asign.south) -- ++(-90:0.5cm) node [below] {$h_2$};
+			\visible<2->{\draw[<-] (asign.140) -- ++(180:0.5cm) node [left] {\phantom{$\sigma=\goedel{s, h_1, h_2}$}$X_i$};}
+			\visible<2->{\draw[<-] (asign.180) -- ++(180:0.5cm) node [left] {$X_j$};}
+			\visible<3->{\draw[<-] (asign.220) -- ++(180:0.5cm) node [left] {$x_i$};}
+			\visible<4->{\draw[<-] (asign.north) -- ++(90:0.5cm) node [above] {$M$};}
+			\visible<5->{\draw[<-] (asign.south) -- ++(-90:0.5cm) node [below] {$h_2$};}
 
-			\draw[->] (asign.east) -- ++(0:0.5cm) node [right] {$\sigma = \goedel{s, h_1, h_2}$};
+			\visible<6->{\draw[->] (asign.east) -- ++(0:0.5cm) node [right] {$\sigma = \goedel{s, h_1, h_2}$};}
 		\end{tikzpicture}
 	\end{center}
 
-	\textcolor{blue}{\small introduce everything slide-by-slide}
+	% \textcolor{blue}{\small introduce everything slide-by-slide}
 \end{frame}
 
 \begin{frame}
@@ -60,21 +60,24 @@
 
 	\begin{center}	
 		\begin{tikzpicture}
-			\node[draw,minimum size=2.5cm] (asign) {\averify};
+			\visible<1->{\node[draw,minimum size=2.5cm] (asign) {\averify};}
 
-			\draw[<-] (asign.140) -- ++(180:0.5cm) node [left] {$X_i$};
-			\draw[<-] (asign.180) -- ++(180:0.5cm) node [left] {$X_j$};
-			\draw[<-] (asign.220) -- ++(180:0.5cm) node [left] (sigma) {$\sigma = \goedel{s, h_1, h_2}$};
-			\draw[<-] (asign.north) -- ++(90:0.5cm) node [above] (message) {$M$};
+			\visible<2->{\draw[<-] (asign.140) -- ++(180:0.5cm) node (X_i) [left] {$\textcolor<6>{BurntOrange}{X_i}$};}
+			\visible<2->{\draw[<-] (asign.180) -- ++(180:0.5cm) node [left] {$\textcolor<6>{BurntOrange}{X_j}$};}
+			\visible<3->{\draw[<-] (asign.220) -- ++(180:0.5cm) node [left] (sigma) {$\textcolor<6>{BurntOrange}{\sigma = \goedel{s, h_1, h_2}}$};}
+			\visible<4->{\draw[<-] (asign.north) -- ++(90:0.5cm) node [above] (message) {$\textcolor<6>{BurntOrange}{M}$};}
 
-			\draw[->] (asign.east) -- ++(0:0.5cm) node [right] {$accept/reject$};
+			\visible<6->{\node[above left=2cm of X_i, draw, ellipse, dotted, color=BurntOrange, thick] (S) {$\textcolor{BurntOrange}{S}$};}
 
-			\path (message.north) -- (sigma.south) 
-				node[midway, sloped, draw, ellipse, dotted, fit=(message.north east)(sigma.south west), inner sep=.5pt]{};
+
+			\visible<5->{\draw[->] (asign.east) -- ++(0:0.5cm) node [right] {$accept/reject$};}
+
+			% \path (message.north) -- (sigma.south) 
+			% 	node[midway, sloped, draw, ellipse, dotted, fit=(message.north east)(sigma.west), inner sep=.5pt]{};
 		\end{tikzpicture}
 	\end{center}
 
-	\textcolor{blue}{\small mention symmetric property in talk}
+	% \textcolor{blue}{\small mention symmetric property in talk}
 \end{frame}
 
 \begin{frame}
@@ -84,24 +87,24 @@
 		\resizebox{.9\hsize}{!}{
 			\begin{tikzpicture}[custom/.style = {rectangle, draw, align=center, inner xsep=3mm, inner ysep=3mm}, -latex]
 				% nodes
-				\node[custom] (kgen) {$\keygen(k) \overset{?}{=} h_2$};
-				\node[custom, right=1cm of kgen.east] (averify) {$\averify(S)$};
-				\node[fit={(kgen) (averify)}, draw, inner xsep=5mm, inner ysep=5mm, label={\verify}] (outer) {};
+				\visible<3->{\node[custom] (kgen) {$\keygen(k) \overset{?}{=} h_2$};}
+				\visible<5->{\node[custom, right=1cm of kgen.east] (averify) {$\averify(\textcolor<7->{BurntOrange}{S})$};
+							\draw (kgen.east) -- node[above, scale=0.6]{$true$} (averify.west);}
+				\visible<1->{\node[fit={(kgen) (averify)}, draw, outer ysep=2mm, inner xsep=5mm, inner ysep=5mm, label={\Large\verify}] (outer) {};}
 				
-				\node[left=.75cm of outer.west] (input) {$\goedel{k,S}$};
-				\node[right=1cm of averify.east] (output1) {$accept/reject$};
-				\node[below=1cm of output1.south] (output2) {$reject$};
+				\visible<2->{\node[left=.75cm of outer.west] (input) {$\goedel{k,\textcolor<7->{BurntOrange}{S}}$};}
+				\visible<6->{\node[right=1cm of averify.east] (output1) {$accept/reject$};}
+				\visible<4->{\node[below=1cm of output1.south] (output2) {$reject$};
+							\draw  (kgen.south) |- node[left, scale=0.6, yshift=.5cm]{$false$} (output2.west);}
 
 				% connections
-				\draw (input.east) to (kgen.west);
-				\draw (kgen.east) -- node[above, scale=0.6]{$true$} (averify.west);
-				\draw (averify.east) to (output1.west);
-				\draw  (kgen.south) |- node[left, scale=0.6, yshift=.5cm]{$false$} (output2.west);
+				\visible<2->{\draw (input.east) to (kgen.west);}
+				\visible<6->{\draw (averify.east) to (output1.west);}
 			\end{tikzpicture}
 		}
 	\end{center}
 
-	\textcolor{blue}{\small explain/show on sec. slides what $S$ contains}
+	%\textcolor{blue}{\small explain/show on sec. slides what $S$ contains}
 \end{frame}
 
 

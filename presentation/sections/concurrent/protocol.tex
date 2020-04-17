@@ -1,50 +1,24 @@
 \begin{frame}
 	\frametitle{Concurrent Signature Protocol}
 
-	\begin{itemize}
+	\begin{itemize}[<+->]
 		\setlength\itemsep{1em}
-		\item<1-> Describing signature exchange between A(lice) and B(ob)
-		\item<2-> Initial signer has to generate keystone
-		\item<3-> Matching signer responds by using the same keystone-fix
-		\item<4-> both parties \textit{ambiguous} until $k$ released
+		\item Describing signature exchange between A(lice) and B(ob)
+		\item Initial signer has to generate keystone
+		\item Matching signer responds by using the same keystone-fix
+		\item both parties \textit{ambiguous} until $k$ released
 	\end{itemize}
 \end{frame}
 
-\begin{frame} % ---------------------------------- SETUP
+\begin{frame}
 	\frametitle{Concurrent Signature Protocol}
 	
 	\begin{center}
 		\begin{tikzpicture}[node distance=2cm,auto,>=stealth']
 			\node[] (bob) {B};
 			\node[left = of bob] (alice) {A};
-			\node[below of=bob, node distance=6cm] (bobground) {};
-			\node[below of=alice, node distance=6cm] (aliceground) {};
-			
-			% vertical lines
-			\draw (alice) -- (aliceground);
-			\draw (bob) -- (bobground);
-		
-			% setup
-			\node[left, align=left] at ($(alice)!0.1!(aliceground)$) {\setup};
-			\node[right, align=right] at ($(bob)!0.1!(bobground)$) {~\setup};
-	
-			% PHANTOMS
-			\node[left, align=left] at ($(alice)!0.25!(aliceground)$) {\phantom{$k\in\kspace$, $f = \textbf{KGEN}(k)$}};
-			\node[right, align=right] at ($(bob)!0.45!(bobground)$) {\phantom{$\averify(\ldots) \overset{?}{=} accept$}};
-			\node[left, align=left] at ($(alice)!0.65!(aliceground)$) {\phantom{$\averify(\ldots) \overset{?}{=} accept$}};
-		\end{tikzpicture}
-	\end{center}
-\end{frame}
-
-\begin{frame} % ---------------------------------- KGEN
-	\frametitle{Concurrent Signature Protocol}
-	
-	\begin{center}
-		\begin{tikzpicture}[node distance=2cm,auto,>=stealth']
-			\node[] (bob) {B};
-			\node[left = of bob] (alice) {A};
-			\node[below of=bob, node distance=6cm] (bobground) {};
-			\node[below of=alice, node distance=6cm] (aliceground) {};
+			\node[below of=bob, node distance=7cm] (bobground) {};
+			\node[below of=alice, node distance=7cm] (aliceground) {};
 			
 			% vertical lines
 			\draw (alice) -- (aliceground);
@@ -55,268 +29,24 @@
 			\node[right, align=right] at ($(bob)!0.1!(bobground)$) {~\setup};
 	
 			% k keystone + KGEN
-			\node[left, align=left] at ($(alice)!0.25!(aliceground)$) {$k\in\kspace$, $f = \textbf{KGEN}(k)$};
-
-			% PHANTOMS
-			\node[right, align=right] at ($(bob)!0.45!(bobground)$) {\phantom{$\averify(\ldots) \overset{?}{=} accept$}};
-			\node[left, align=left] at ($(alice)!0.65!(aliceground)$) {\phantom{$\averify(\ldots) \overset{?}{=} accept$}};
-		\end{tikzpicture}
-	\end{center}
-\end{frame}
-
-\begin{frame} % ---------------------------------- ASIGN
-	\frametitle{Concurrent Signature Protocol}
-	
-	\begin{center}
-		\begin{tikzpicture}[node distance=2cm,auto,>=stealth']
-			\node[] (bob) {B};
-			\node[left = of bob] (alice) {A};
-			\node[below of=bob, node distance=6cm] (bobground) {};
-			\node[below of=alice, node distance=6cm] (aliceground) {};
-			
-			% vertical lines
-			\draw (alice) -- (aliceground);
-			\draw (bob) -- (bobground);
-		
-			% setup
-			\node[left, align=left] at ($(alice)!0.1!(aliceground)$) {\setup};
-			\node[right, align=right] at ($(bob)!0.1!(bobground)$) {~\setup};
-	
-			% k keystone + KGEN
-			\node[left, align=left] at ($(alice)!0.25!(aliceground)$) {$k\in\kspace$, $f = \textbf{KGEN}(k)$};
+			\visible<2->{\node[left, align=left] at ($(alice)!0.225!(aliceground)$) {$k\in\kspace$, $\textcolor<9>{BurntOrange}{f} = \textbf{KGEN}(k)$};}
 			
 			% ASIGN + Arrow
-			\node[left, align=left] at ($(alice)!0.4!(aliceground)$) {$\asign(\ldots) \eqqcolon \sigma_A$};
-			
-			% PHANTOMS
-			\node[right, align=right] at ($(bob)!0.45!(bobground)$) {\phantom{$\averify(\ldots) \overset{?}{=} accept$}};
-			\node[left, align=left] at ($(alice)!0.65!(aliceground)$) {\phantom{$\averify(\ldots) \overset{?}{=} accept$}};
-		\end{tikzpicture}
-	\end{center}
-\end{frame}
-
-\begin{frame} % ---------------------------------- Arrow
-	\frametitle{Concurrent Signature Protocol}
-	
-	\begin{center}
-		\begin{tikzpicture}[node distance=2cm,auto,>=stealth']
-			\node[] (bob) {B};
-			\node[left = of bob] (alice) {A};
-			\node[below of=bob, node distance=6cm] (bobground) {};
-			\node[below of=alice, node distance=6cm] (aliceground) {};
-			
-			% vertical lines
-			\draw (alice) -- (aliceground);
-			\draw (bob) -- (bobground);
-		
-			% setup
-			\node[left, align=left] at ($(alice)!0.1!(aliceground)$) {\setup};
-			\node[right, align=right] at ($(bob)!0.1!(bobground)$) {~\setup};
-	
-			% k keystone + KGEN
-			\node[left, align=left] at ($(alice)!0.25!(aliceground)$) {$k\in\kspace$, $f = \textbf{KGEN}(k)$};
-			
-			% ASIGN + Arrow
-			\node[left, align=left] at ($(alice)!0.4!(aliceground)$) {$\asign(\ldots) \eqqcolon \sigma_A$};
-			\draw[->, dashed] ($(alice)!0.4!(aliceground)$) -- ($(bob)!0.45!(bobground)$);
-			
-			% PHANTOMS
-			\node[right, align=right] at ($(bob)!0.45!(bobground)$) {\phantom{$\averify(\ldots) \overset{?}{=} accept$}};			
-			\node[left, align=left] at ($(alice)!0.65!(aliceground)$) {\phantom{$\averify(\ldots) \overset{?}{=} accept$}};
-		\end{tikzpicture}
-	\end{center}
-\end{frame}
-
-\begin{frame} % ---------------------------------- AVERIFY
-	\frametitle{Concurrent Signature Protocol}
-	
-	\begin{center}
-		\begin{tikzpicture}[node distance=2cm,auto,>=stealth']
-			\node[] (bob) {B};
-			\node[left = of bob] (alice) {A};
-			\node[below of=bob, node distance=6cm] (bobground) {};
-			\node[below of=alice, node distance=6cm] (aliceground) {};
-			
-			% vertical lines
-			\draw (alice) -- (aliceground);
-			\draw (bob) -- (bobground);
-		
-			% setup
-			\node[left, align=left] at ($(alice)!0.1!(aliceground)$) {\setup};
-			\node[right, align=right] at ($(bob)!0.1!(bobground)$) {~\setup};
-	
-			% k keystone + KGEN
-			\node[left, align=left] at ($(alice)!0.25!(aliceground)$) {$k\in\kspace$, $f = \textbf{KGEN}(k)$};
-			
-			% ASIGN + Arrow
-			\node[left, align=left] at ($(alice)!0.4!(aliceground)$) {$\asign(\ldots) \eqqcolon \sigma_A$};
-			\draw[->, dashed] ($(alice)!0.4!(aliceground)$) -- ($(bob)!0.45!(bobground)$);
+			\visible<3->{\node[left, align=left] at ($(alice)!0.4!(aliceground)$) {$\asign(X_A, X_B, x_A, f, M_A)$ \\ {\visible<4->{$= \goedel{s_A, h_A, \textcolor<9>{BurntOrange}{f}} \eqqcolon \textcolor<7>{BurntOrange}{\sigma_A}$} }};}
+			\visible<5->{\draw[->, dashed] ($(alice)!0.4!(aliceground)$) -- node[sloped, above]{$\textcolor<7>{BurntOrange}{\sigma_A}$} ($(bob)!0.45!(bobground)$);}
 			
 			% AVERIFY
-			\node[right, align=right] at ($(bob)!0.45!(bobground)$) {$\averify(\ldots) \overset{?}{=} accept$};
-
-			% PHANTOM
-			\node[left, align=left] at ($(alice)!0.65!(aliceground)$) {\phantom{$\averify(\ldots) \overset{?}{=} accept$}};
-		\end{tikzpicture}
-	\end{center}
-\end{frame}
-
-\begin{frame} % ---------------------------------- ASIGN
-	\frametitle{Concurrent Signature Protocol}
-	
-	\begin{center}
-		\begin{tikzpicture}[node distance=2cm,auto,>=stealth']
-			\node[] (bob) {B};
-			\node[left = of bob] (alice) {A};
-			\node[below of=bob, node distance=6cm] (bobground) {};
-			\node[below of=alice, node distance=6cm] (aliceground) {};
-			
-			% vertical lines
-			\draw (alice) -- (aliceground);
-			\draw (bob) -- (bobground);
-		
-			% setup
-			\node[left, align=left] at ($(alice)!0.1!(aliceground)$) {\setup};
-			\node[right, align=right] at ($(bob)!0.1!(bobground)$) {~\setup};
-	
-			% k keystone + KGEN
-			\node[left, align=left] at ($(alice)!0.25!(aliceground)$) {$k\in\kspace$, $f = \textbf{KGEN}(k)$};
-			
-			% ASIGN + Arrow
-			\node[left, align=left] at ($(alice)!0.4!(aliceground)$) {$\asign(\ldots) \eqqcolon \sigma_A$};
-			\draw[->, dashed] ($(alice)!0.4!(aliceground)$) -- ($(bob)!0.45!(bobground)$);
-			
-			% % AVERIFY
-			\node[right, align=right] at ($(bob)!0.45!(bobground)$) {$\averify(\ldots) \overset{?}{=} accept$};
+			\visible<6->{\node[right, align=center] at ($(bob)!0.45!(bobground)$) {$\averify(\textcolor<7>{BurntOrange}{\sigma_A}, X_A, X_B, M_A)$};}
 
 			% ASIGN + Arrow
-			\node[right, align=right] at ($(bob)!0.6!(bobground)$) {$\sigma_B \coloneqq \asign(\ldots)$};
+			\visible<8->{\node[right, align=left] at ($(bob)!0.6!(bobground)$) {$\asign(X_B, X_A, x_B, \textcolor<9>{BurntOrange}{f}, M_B)$};}
+			\visible<9->{\draw[->, dashed] ($(bob)!0.6!(bobground)$) -- node[sloped, above]{$\sigma_B$} ($(alice)!0.65!(aliceground)$);}
 
 			% AVERIFY
-			\node[left, align=left] at ($(alice)!0.65!(aliceground)$) {\phantom{$\averify(\ldots) \overset{?}{=} accept$}};
-		\end{tikzpicture}
-	\end{center}
-\end{frame}
-
-\begin{frame} % ---------------------------------- Arrow
-	\frametitle{Concurrent Signature Protocol}
-	
-	\begin{center}
-		\begin{tikzpicture}[node distance=2cm,auto,>=stealth']
-			\node[] (bob) {B};
-			\node[left = of bob] (alice) {A};
-			\node[below of=bob, node distance=6cm] (bobground) {};
-			\node[below of=alice, node distance=6cm] (aliceground) {};
-			
-			% vertical lines
-			\draw (alice) -- (aliceground);
-			\draw (bob) -- (bobground);
-		
-			% setup
-			\node[left, align=left] at ($(alice)!0.1!(aliceground)$) {\setup};
-			\node[right, align=right] at ($(bob)!0.1!(bobground)$) {~\setup};
-	
-			% k keystone + KGEN
-			\node[left, align=left] at ($(alice)!0.25!(aliceground)$) {$k\in\kspace$, $f = \textbf{KGEN}(k)$};
-			
-			% ASIGN + Arrow
-			\node[left, align=left] at ($(alice)!0.4!(aliceground)$) {$\asign(\ldots) \eqqcolon \sigma_A$};
-			\draw[->, dashed] ($(alice)!0.4!(aliceground)$) -- ($(bob)!0.45!(bobground)$);
-			
-			% % AVERIFY
-			\node[right, align=right] at ($(bob)!0.45!(bobground)$) {$\averify(\ldots) \overset{?}{=} accept$};
-
-			% ASIGN + Arrow
-			\node[right, align=right] at ($(bob)!0.6!(bobground)$) {$\sigma_B \coloneqq \asign(\ldots)$};
-			\draw[->, dashed] ($(bob)!0.6!(bobground)$) -- ($(alice)!0.65!(aliceground)$);
-
-			% AVERIFY
-			\node[left, align=left] at ($(alice)!0.65!(aliceground)$) {\phantom{$\averify(\ldots) \overset{?}{=} accept$}};
+			\visible<10->{\node[left, align=left] at ($(alice)!0.65!(aliceground)$) {$\averify(\sigma_B, X_B, X_A, M_B)$};}
 
 			% keystone
-			% \draw[->, dashed] ($(alice)!0.8!(aliceground)$) -- node[above]{$k$} ($(bob)!0.85!(bobground)$);
-		\end{tikzpicture}
-	\end{center}
-\end{frame}
-
-\begin{frame} % ---------------------------------- AVERIFY
-	\frametitle{Concurrent Signature Protocol}
-	
-	\begin{center}
-		\begin{tikzpicture}[node distance=2cm,auto,>=stealth']
-			\node[] (bob) {B};
-			\node[left = of bob] (alice) {A};
-			\node[below of=bob, node distance=6cm] (bobground) {};
-			\node[below of=alice, node distance=6cm] (aliceground) {};
-			
-			% vertical lines
-			\draw (alice) -- (aliceground);
-			\draw (bob) -- (bobground);
-		
-			% setup
-			\node[left, align=left] at ($(alice)!0.1!(aliceground)$) {\setup};
-			\node[right, align=right] at ($(bob)!0.1!(bobground)$) {~\setup};
-	
-			% k keystone + KGEN
-			\node[left, align=left] at ($(alice)!0.25!(aliceground)$) {$k\in\kspace$, $f = \textbf{KGEN}(k)$};
-			
-			% ASIGN + Arrow
-			\node[left, align=left] at ($(alice)!0.4!(aliceground)$) {$\asign(\ldots) \eqqcolon \sigma_A$};
-			\draw[->, dashed] ($(alice)!0.4!(aliceground)$) -- ($(bob)!0.45!(bobground)$);
-			
-			% % AVERIFY
-			\node[right, align=right] at ($(bob)!0.45!(bobground)$) {$\averify(\ldots) \overset{?}{=} accept$};
-
-			% ASIGN + Arrow
-			\node[right, align=right] at ($(bob)!0.6!(bobground)$) {$\sigma_B \coloneqq \asign(\ldots)$};
-			\draw[->, dashed] ($(bob)!0.6!(bobground)$) -- ($(alice)!0.65!(aliceground)$);
-
-			% AVERIFY
-			\node[left, align=left] at ($(alice)!0.65!(aliceground)$) {$\averify(\ldots) \overset{?}{=} accept$};
-
-			% keystone
-			% \draw[->, dashed] ($(alice)!0.8!(aliceground)$) -- node[above]{$k$} ($(bob)!0.85!(bobground)$);
-		\end{tikzpicture}
-	\end{center}
-\end{frame}
-
-\begin{frame} % ---------------------------------- Keystone k
-	\frametitle{Concurrent Signature Protocol}
-	
-	\begin{center}
-		\begin{tikzpicture}[node distance=2cm,auto,>=stealth']
-			\node[] (bob) {B};
-			\node[left = of bob] (alice) {A};
-			\node[below of=bob, node distance=6cm] (bobground) {};
-			\node[below of=alice, node distance=6cm] (aliceground) {};
-			
-			% vertical lines
-			\draw (alice) -- (aliceground);
-			\draw (bob) -- (bobground);
-		
-			% setup
-			\node[left, align=left] at ($(alice)!0.1!(aliceground)$) {\setup};
-			\node[right, align=right] at ($(bob)!0.1!(bobground)$) {~\setup};
-	
-			% k keystone + KGEN
-			\node[left, align=left] at ($(alice)!0.25!(aliceground)$) {$k\in\kspace$, $f = \textbf{KGEN}(k)$};
-			
-			% ASIGN + Arrow
-			\node[left, align=left] at ($(alice)!0.4!(aliceground)$) {$\asign(\ldots) \eqqcolon \sigma_A$};
-			\draw[->, dashed] ($(alice)!0.4!(aliceground)$) -- ($(bob)!0.45!(bobground)$);
-			
-			% % AVERIFY
-			\node[right, align=right] at ($(bob)!0.45!(bobground)$) {$\averify(\ldots) \overset{?}{=} accept$};
-
-			% ASIGN + Arrow
-			\node[right, align=right] at ($(bob)!0.6!(bobground)$) {$\sigma_B \coloneqq \asign(\ldots)$};
-			\draw[->, dashed] ($(bob)!0.6!(bobground)$) -- ($(alice)!0.65!(aliceground)$);
-
-			% AVERIFY
-			\node[left, align=left] at ($(alice)!0.65!(aliceground)$) {$\averify(\ldots) \overset{?}{=} accept$};
-
-			% keystone
-			\draw[->, dashed] ($(alice)!0.8!(aliceground)$) -- node[above]{$k$} ($(bob)!0.85!(bobground)$);
+			\visible<11->{\draw[->, dashed] ($(alice)!0.8!(aliceground)$) -- node[above]{$k$} ($(bob)!0.85!(bobground)$);}
 		\end{tikzpicture}
 	\end{center}
 \end{frame}

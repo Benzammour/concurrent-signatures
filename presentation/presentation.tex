@@ -1,5 +1,6 @@
-\documentclass{beamer}
+\documentclass[usenames,dvipsnames]{beamer}
 
+\usepackage{xcolor}
 \usepackage{mathtools}
 \usepackage{tikz}
 \usepackage{pgfplots}
@@ -49,7 +50,7 @@
 \newcommand{\asign}{\textbf{ASIGN} }
 \newcommand{\averify}{\textbf{AVERIFY} }
 \newcommand{\verify}{\textbf{VERIFY} }
-\newcommand{\keygen}{\textbf{KGEN}}
+\newcommand{\keygen}{\textbf{KGEN} }
 
 \newcommand{\mespace}{\mathcal{M}}
 \newcommand{\sspace}{\mathcal{S}}
@@ -76,6 +77,7 @@
 \usetheme{Madrid}
 \usecolortheme{default}
 \usefonttheme{professionalfonts}
+\setbeamertemplate{navigation symbols}{}
 
 \AtBeginSection[]
 {
@@ -86,7 +88,6 @@
 }
 
 \begin{document}
-
 
 \frame{\titlepage}
 
@@ -140,6 +141,8 @@
 % --------------------------------------------------------- Proof of Lemmata
 \section{Concrete Scheme}
 \input{sections/concrete-scheme/main.tex}
+
+\input{sections/concrete-scheme/unforgeability-proof.tex}
 
 % --------------------------------------------------------- Conclusion
 \section{Conclusion}
