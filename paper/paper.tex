@@ -1,39 +1,39 @@
-\documentclass[a4paper, 12pt]{article}
-\usepackage{../cs}
-\usepackage{gensymb}
-\usepackage{float}
-\usepackage{subcaption}
+\documentclass[final]{IEEEtran}%
 
-\title{ }
+\title{Concurrent Signatures}
+\ifcsname{IEEEauthorblockN}\endcsname%
+  \author{\IEEEauthorblockN{Samir Benzammour}\\
+    \IEEEauthorblockA{\textit{Algorithms and Complexity} \\
+    \textit{RWTH Aachen University}\\
+    Aachen, Germany \\
+    samir.benzammour@rwth-aachen.de}
+  }
+\else%
+  \author{Samir Benzammour\\
+    \textit{Algorithms and Complexity}\\
+    \textit{RWTH Aachen University}
+    Aachen, Germany \\
+    samir.benzammour@rwth-aachen.de
+  }
+\fi%
+\date{\today}
+
+% ------------------------------- packages
+\usepackage{cite}
+
 \begin{document}
+\maketitle
 
-\begin{center}
-	\begin{LARGE}
-		\textbf{Concurrent Signatures}\\[2em]
-		Autoren:
-	\end{LARGE}
-	\begin{large}
-		\begin{center}
-			Samir Benzammour \\ 376832 \\ \texttt{samir.benzammour@rwth-aachen.de}
-		\end{center}
-	\end{large}	
-	\vfill
-	\vfill
-	\vfill
-	\vfill
-	\begin{large}
-		Last change:\\
-		\today\\
-	\end{large}
-	\vfill
-\end{center}
-\newpage
-\tableofcontents
-\newpage
+
+\begin{abstract}
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+\end{abstract}
 
 \section{Introduction}
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
-\bibliography{uni}
-\bibliographystyle{plain}
+\section*{References}
 
+\bibliographystyle{IEEEtran}
+\bibliography{bibliography}
 \end{document}
