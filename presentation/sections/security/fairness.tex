@@ -2,18 +2,18 @@
 	\frametitle{Fairness}
 
 	\begin{itemize}[<+->]
-		\setlength\itemsep{1em}
-		\item adversary $E$ outputs $S=\goedel{\sigma,X_c, X_d, M}$
-		\item Further $\averify(S)=accept$
-		\item $E$ wins if one of the following holds
-			\begin{itemize}
-				\item $f$ was previous output from \keygen, no \textbf{KReveal} query was made and $\goedel{k, S}$ is accepted by \verify
-				\item $E$ outputs $\goedel{\sigma',X_d, X_c, M'}$ with $\sigma' = \goedel{s', h_1', f}$ 
-					\begin{itemize}
-						\item<6-> $\averify(S') = accept$
-						\item<6-> $\verify(\goedel{k,S}) = accept$
-						\item<6-> $\verify(\goedel{k,S'}) = reject$
-					\end{itemize}
-			\end{itemize}
+    \setlength\itemsep{1em}
+    \item adversary $E$ can query everything except \averify and \verify queries
+		\item $E$ returns keystone $k$ and a \textcolor{BurntOrange}{valid} signature $S = \goedel{\sigma, X_c, X_d, M}$
+		\item adversary wins if one of the following holds
+      \begin{enumerate}[(1.)]
+        \setlength\itemsep{.75em}  
+				\item $E$ created $k$ s.t. signature is accepted by \verify
+				\item $E$ creates additional \textcolor{BurntOrange}{valid} signature $S'$ with same keystone-fix
+          \begin{itemize}
+            \item but only one of both is accepted by \verify
+            \item i.e. $E$ creates signature with same keystone but is not bound by it
+          \end{itemize}
+			\end{enumerate}
 	\end{itemize}
 \end{frame}

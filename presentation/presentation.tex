@@ -2,6 +2,7 @@
 
 \usepackage{xcolor}
 \usepackage{mathtools}
+\usepackage{amsmath,stmaryrd}
 \usepackage{tikz}
 \usepackage{pgfplots}
 \usetikzlibrary{
@@ -14,16 +15,6 @@
 }
 \tikzset{>=latex}
 \pgfplotsset{compat=1.14}
-
-% --------------------------------------------------------- continue number counter over multiple slides
-% \usepackage{enumitem}
-% \setenumerate[1]{label=\arabic*.}
-
-% \setitemize{label=\usebeamerfont*{itemize item}%
-%   \usebeamercolor[fg]{itemize item}
-%   \usebeamertemplate{itemize item}}
-
-% \newcounter{ResumeEnumerate}
 
 % --------------------------------------------------------- x'ed out arrow
 \newcommand*{\StrikeThruDistance}{0.2cm}%
@@ -104,46 +95,39 @@
 \subsection{Concurrent Approach}
 \input{sections/introduction/conapp.tex}
 
-% --------------------------------------------------------- Preliminaries
-\section{Preliminaries}
-
-\subsection{Discrete Logarithm Assumption}
-\input{sections/preliminaries/dla.tex}
-
-\subsection{Random Oracle}
-\input{sections/preliminaries/ro.tex}
-
-\subsection{Definitions}
-\input{sections/preliminaries/definitions.tex}
-
 % --------------------------------------------------------- Concurrent Signature Protocol
 \section{Concurrent Signature Protocol}
 
-\subsection{Scheme}
-\input{sections/concurrent/scheme.tex}
+  \subsection{Scheme}
+  \input{sections/concurrent/scheme.tex}
 
-\subsection{Protocol}
-\input{sections/concurrent/protocol.tex}
+  \subsection{Protocol}
+  \input{sections/concurrent/protocol.tex}
 
 % --------------------------------------------------------- Security Model
 \section{Security Model}
 \input{sections/security/main.tex}
 
-\subsection{Unforgeability}
-\input{sections/security/unforgeability.tex}
+  \subsection{Fairness}
+  \input{sections/security/fairness.tex}
 
-\subsection{Ambiguity}
-\input{sections/security/ambiguity.tex}
+  \subsection{Ambiguity}
+  \input{sections/security/ambiguity.tex}
 
-\subsection{Fairness}
-\input{sections/security/fairness.tex}
+  \subsection{Unforgeability}
+  \input{sections/security/unforgeability.tex}
 
 % --------------------------------------------------------- Proof of Lemmata
 \section{Concrete Scheme}
 \input{sections/concrete-scheme/main.tex}
 
-\input{sections/concrete-scheme/unforgeability-proof.tex}
+% Preliminaries
+\input{sections/concrete-scheme/preliminaries/dla.tex}
+\input{sections/concrete-scheme/preliminaries/ro.tex}
+\input{sections/concrete-scheme/preliminaries/definitions.tex}
+\input{sections/concrete-scheme/preliminaries/forking-lemma.tex}
 
+\input{sections/concrete-scheme/unforgeability-proof.tex}
 % --------------------------------------------------------- Conclusion
 \section{Conclusion}
 \input{sections/conclusion.tex}

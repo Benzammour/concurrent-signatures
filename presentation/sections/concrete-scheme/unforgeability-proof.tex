@@ -4,7 +4,7 @@
 	\textit{Proof Idea:}
 	\begin{enumerate}[<+->]
 		\item Assumption: hardness of the discrete logarithm
-		\item Proof by contraposition: Scheme is forgeable with an non-neglible probability
+		\item Proof by contraposition: Scheme is forgeable with an non-negligible probability
 		\item Create system, that uses the adversary to solve the discrete logarithm problem
 	\end{enumerate}
 \end{frame}
@@ -126,10 +126,65 @@
 \begin{frame}
 	\frametitle{Proof - Simulation}
 
-	Case 1: $h = h_1 + f$ never appeared in previous signature query
-
-	\begin{itemize}
+	\textbf{Case 1:} $h = h_1 + f$ never appeared in previous signature query
+	\begin{itemize}[<+->]
 		\item force $E$ to rerun simulation to produce $(r_1, h', r_2')$ with $h \neq h'$
+		\item we have $h = h_1 + f \neq h_1' + f' = h'$
+			\begin{itemize}[<+->]
+				\item $h_1 \overset{?}{=} h_1'$
+				\item \textcolor<+->{BurntOrange}{$f \overset{?}{=} f'$}
+			\end{itemize}
+		\item due to different output from oracle queries:
+			\visible<+->{\begin{equation*}
+				% \textcolor<8->{ForestGreen}{g}^s \textcolor<8->{ForestGreen}{X}^{h_1} \textcolor<8->{ForestGreen}{X_d}^{\textcolor<+->{BurntOrange}{f}} = \textcolor<8->{ForestGreen}{g}^{s'} \textcolor<8->{ForestGreen}{X}^{h_1'} \textcolor<8->{ForestGreen}{X_d}^{\textcolor<+->{BurntOrange}{f}}
+				g^s X^{\textcolor<8->{BurntOrange}{h_1}} X_d^{\textcolor<8->{BurntOrange}{f}} = g^{s'} X^{\textcolor<8->{BurntOrange}{h_1'}} X_d^{\textcolor<8->{BurntOrange}{f}}
+			\end{equation*}}
 	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Proof - Simulation}
+
+	\begin{align*}
+		\visible<1->{\textcolor<2>{ForestGreen}{g}^{\textcolor<3>{BurntOrange}{s}} \textcolor<2>{ForestGreen}{X}^{\textcolor<3>{BurntOrange}{h_1}} \textcolor<2>{ForestGreen}{X_d}^f &= \textcolor<2>{ForestGreen}{g}^{\textcolor<3>{BurntOrange}{s'}} \textcolor<2>{ForestGreen}{X}^{\textcolor<3>{BurntOrange}{h_1'}} \textcolor<2>{ForestGreen}{X_d}^{\textcolor<3>{BurntOrange}{f}} \\}
+		\visible<3->{\textcolor<3>{BurntOrange}{s} + x \textcolor<3>{BurntOrange}{h_1} + \textcolor<3>{BurntOrange}{f} &= \textcolor<3>{BurntOrange}{s'} + x \textcolor<3>{BurntOrange}{h_1'} + \textcolor<3>{BurntOrange}{f} \\}
+		\visible<4->{s + x h_1 &= s' + x h_1' \\}
+		\visible<5->{x &= \frac{s-s'}{h_1' - h_1} \\}
+	\end{align*}
+	
+	\begin{itemize}
+		\item<6-> solved the discrete logarithm problem with non-negligible probability
+		\item<7-> Henceforth, $\mathcal{A}$ solves the discrete logarithm problem in case 1
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Proof - Simulation}
+
+  \visible<+->{\textbf{Case 2:} $h' = h$, output of signature query $\goedel{X_{c'}, X_{d'}, f', M'}$}
+
+  \begin{itemize}[<+->]
+    \item then we have: $\sigma = \goedel{s', h', f'}$
+    \item due to $h = h'$ we have
+      \[ h = H_2(\textcolor<4->{BurntOrange}{g^s X^{h_1} X_d^f} ~\|~ \textcolor<5->{ForestGreen}{M}) = H_2(\textcolor<4->{BurntOrange}{g^{s'} X_{c'}^{h_1'} X_{d'}^{f'}} ~\|~ \textcolor<5->{ForestGreen}{M'}) = h' \]
+    \item<6-> when $X \neq X_{c'}, X_{d'}$ or $X_{c'}, X_{d'} = 0$ but exponents are different
+      \[ g^s X^{h_1} X_d^f = X_{c'}^{h_1'} X_{d'}^{f'} \]
+      is easily solveable for $x$
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Proof - Simulation}
+  
+  \begin{itemize}[<+->]
+    \item case where $X_{c'},X_{d'} = X$ and exponents are the same is negligible
+    \begin{itemize}[<+->]
+      \item $X_{c'}$ because no $\asign$ query can be done on $\goedel{X_c, X_i, f, M}$
+      \item $X_{d'}$ because some $H_1$ has to match $h_1'$ 
+    \end{itemize}
+    \item $\mathcal{A}$ can solve the discrete logarithm in case 2
+    \item Hence, $\mathcal{A}$ can solve the discrete logarithm $\lightning$
+  \end{itemize}
 
 \end{frame}

@@ -1,7 +1,7 @@
 \begin{frame}
 	\frametitle{Concurrent Scheme}
 
-	\begin{definition}[Concurrent Signature Scheme]
+	\begin{definition}[Concurrent Signature Scheme]<+->
 		A \textbf{concurrent signature scheme} is a digital signature scheme, that holds the following algorithms
 		\begin{itemize}
 			\item \setup
@@ -11,32 +11,41 @@
 		\end{itemize}
 	\end{definition}
 
-	\begin{block}{Notation}
-		\begin{itemize}
-			\item Let $k$ denote the \textit{keystone}
-		\end{itemize}
+  \begin{block}{Notation}<+->
+    Let $k$ denote the \textit{keystone}
 	\end{block}
 \end{frame}
 
 \begin{frame}
-	\frametitle{\setup}
+	\frametitle{Algorithms}
 
-	\begin{itemize}
-		\item takes security parameter $\ell$
-		\item outputs descriptions of all relevant sets and keys
-			\begin{itemize}
-				\item set of participants $\uspace$
-				\item message space $\mespace$
-				\item signature space $\sspace$
-				\item keystone space $\kspace$
-				\item keystone fix space $\kfspace$
-			\end{itemize}
-		\item function $\keygen: \kspace \to \kfspace$
-	\end{itemize}
+  \begin{center}	
+		\begin{tikzpicture}
+			\visible<1->{\node[draw,minimum size=2.5cm] (setup) {\setup};}
+
+			\visible<2->{\draw[<-] (setup.180) -- ++(180:0.5cm) node [left] {\phantom{$\keygen: \kspace \to \kfspace$}$\ell$};}
+
+      \visible<3->{\draw[->] (setup.20) -- ++(0:0.5cm) node [right] {$\uspace, \mespace, \sspace, \kspace, \kfspace$};}
+      \visible<3->{\draw[->] (setup.-20) -- ++(0:0.5cm) node [right] {$\keygen: \kspace \to \kfspace$};}
+		\end{tikzpicture}
+	\end{center}
+
+	% \begin{itemize}
+	% 	\item takes security parameter $\ell$
+	% 	\item outputs descriptions of all relevant sets and keys
+	% 		\begin{itemize}
+	% 			\item set of participants $\uspace$
+	% 			\item message space $\mespace$
+	% 			\item signature space $\sspace$
+	% 			\item keystone space $\kspace$
+	% 			\item keystone fix space $\kfspace$
+	% 		\end{itemize}
+	% 	\item function $\keygen: \kspace \to \kfspace$
+	% \end{itemize}
 \end{frame}
 
 \begin{frame}
-	\frametitle{\asign}
+	\frametitle{Algorithms}
 
 	\begin{center}	
 		\begin{tikzpicture}
@@ -56,7 +65,7 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{\averify}
+	\frametitle{Algorithms}
 
 	\begin{center}	
 		\begin{tikzpicture}
@@ -67,7 +76,7 @@
 			\visible<3->{\draw[<-] (asign.220) -- ++(180:0.5cm) node [left] (sigma) {$\textcolor<6>{BurntOrange}{\sigma = \goedel{s, h_1, h_2}}$};}
 			\visible<4->{\draw[<-] (asign.north) -- ++(90:0.5cm) node [above] (message) {$\textcolor<6>{BurntOrange}{M}$};}
 
-			\visible<6->{\node[above left=2cm of X_i, draw, ellipse, dotted, color=BurntOrange, thick] (S) {$\textcolor{BurntOrange}{S}$};}
+			\visible<6->{\node[above left=1cm of X_i, draw, ellipse, dotted, color=BurntOrange, thick] (S) {$\textcolor{BurntOrange}{S}$};}
 
 
 			\visible<5->{\draw[->] (asign.east) -- ++(0:0.5cm) node [right] {$accept/reject$};}
@@ -81,7 +90,7 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{\verify}
+	\frametitle{Algorithms}
 
 	\begin{center}
 		\resizebox{.9\hsize}{!}{
@@ -107,18 +116,17 @@
 	%\textcolor{blue}{\small explain/show on sec. slides what $S$ contains}
 \end{frame}
 
+% \begin{frame}
+% 	\frametitle{Algorithm Synergy}
 
-\begin{frame}
-	\frametitle{Algorithm Synergy}
+% 	\resizebox{.9\hsize}{!}{
+% 		\begin{tikzpicture}[custom/.style = {rectangle, draw, align=center, inner xsep=3mm, inner ysep=3mm}, -latex]
+% 			\node[custom] (asign) {\averify};
+% 			\node[custom, below=1cm of asign] (verify) {$\verify(S)$};
+% 			\node[custom, above left=.1cm of verify] (verify) {H};
+% 		\end{tikzpicture}
+% 	}
 
-	\resizebox{.9\hsize}{!}{
-		\begin{tikzpicture}[custom/.style = {rectangle, draw, align=center, inner xsep=3mm, inner ysep=3mm}, -latex]
-			\node[custom] (asign) {\averify};
-			\node[custom, below=1cm of asign] (verify) {$\verify(S)$};
-			\node[custom, above left=.1cm of verify] (verify) {H};
-		\end{tikzpicture}
-	}
+% 	\textcolor{blue}{TODO: add verification, signing, oracle/hash function synergy graph}
 
-	\textcolor{blue}{TODO: add verification, signing, oracle/hash function synergy graph}
-
-\end{frame}
+% \end{frame}
