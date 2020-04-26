@@ -15,18 +15,18 @@
 	\end{definition}
 \end{frame}
 
-\begin{frame}
-	\frametitle{Discrete Logarithmic Problem}
-	\begin{block}{Discrete-Logarithm Experiment $DLog_{\mathcal{A}, \mathcal{G}}(n)$}<1->
-		\begin{itemize}
-			\item Run $\mathcal{G}(1^n)$ to acquire $(\mathbb{G}, p, g)$ where $\mathbb{G}$ is a cyclic group, $p$ is its order (with $||p|| = n$) and $g\in \mathbb{G}$ is $\mathbb{G}$'s generator
-			\item Choose a random $h\in\mathbb{G}$
-			\item $\mathcal{A}$ is given $\mathbb{G}, p, g$ and $h$, and outputs $i\in \ints_p$
-			\item The result of the experiment is $1$ if $g^i = h$, and $0$ otherwise.
-		\end{itemize}
-	\end{block}
-	\begin{definition}<2->
-		We say the \textbf{discrete logarithm problem is hard relative to} $\mathcal{G}$ if for all polynomial-time algorithms $\mathcal{A}$ there exists a negligible function $\textsf{negl}$ such that 
-			$$\Pr[DLog_{\mathcal{A}, \mathcal{G}}(n) = 1] \leq \textsf{negl}(n)$$
-	\end{definition}
-\end{frame}
+% \begin{frame}
+% 	\frametitle{Discrete Logarithmic Problem}
+% 	\begin{block}{Discrete-Logarithm Experiment $DLog_{\mathcal{A}, \mathcal{G}}(n)$}<1->
+% 		\begin{itemize}
+% 			\item Run $\mathcal{G}(1^n)$ to acquire $(\mathbb{G}, p, g)$ where $\mathbb{G}$ is a cyclic group, $p$ is its order (with $||p|| = n$) and $g\in \mathbb{G}$ is $\mathbb{G}$'s generator
+% 			\item Choose a random $h\in\mathbb{G}$
+% 			\item $\mathcal{A}$ is given $\mathbb{G}, p, g$ and $h$, and outputs $i\in \ints_p$
+% 			\item The result of the experiment is $1$ if $g^i = h$, and $0$ otherwise.
+% 		\end{itemize}
+% 	\end{block}
+% 	\begin{definition}<2->
+% 		We say the \textbf{discrete logarithm problem is hard relative to} $\mathcal{G}$ if for all polynomial-time algorithms $\mathcal{A}$ there exists a negligible function $\textsf{negl}$ such that 
+% 			$$\Pr[DLog_{\mathcal{A}, \mathcal{G}}(n) = 1] \leq \textsf{negl}(n)$$
+% 	\end{definition}
+% \end{frame}

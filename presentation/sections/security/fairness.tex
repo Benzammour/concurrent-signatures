@@ -3,16 +3,16 @@
 
 	\begin{itemize}[<+->]
     \setlength\itemsep{1em}
-    \item adversary $E$ can query everything except \averify and \verify queries
-		\item $E$ returns keystone $k$ and a \textcolor{BurntOrange}{valid} signature $S = \goedel{\sigma, X_c, X_d, M}$
+    \item adversary \textcolor{Red}{$E$} can query everything except \averify and \verify queries
+		\item \textcolor{Red}{$E$} returns keystone $k$ and a \textcolor{BurntOrange}{valid} signature $S = \goedel{\sigma, X_c, X_d, M}$
 		\item adversary wins if one of the following holds
       \begin{enumerate}[(1.)]
         \setlength\itemsep{.75em}  
-				\item $E$ created $k$ s.t. signature is accepted by \verify
-				\item $E$ creates additional \textcolor{BurntOrange}{valid} signature $S'$ with same keystone-fix
+				\item \textcolor{Red}{$E$} created $k$ s.t. signature is accepted by \verify
+				\item \textcolor{Red}{$E$} creates additional \textcolor{BurntOrange}{valid} signature $S'$ with same keystone-fix
           \begin{itemize}
             \item but only one of both is accepted by \verify
-            \item i.e. $E$ creates signature with same keystone but is not bound by it
+            \item i.e. \textcolor{Red}{$E$} creates signature with same keystone but is not bound by it
           \end{itemize}
 			\end{enumerate}
 	\end{itemize}

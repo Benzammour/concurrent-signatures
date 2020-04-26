@@ -3,38 +3,33 @@
 
 	\begin{itemize}[<+->]
 		\item based on Ring Signatures
-			\begin{itemize}
-				\item in turn based on: Schnorr Signatures
-			\end{itemize}
 		\item \setup 
-		\begin{itemize}
-			\item outputs two large primes $p$ and $q$ with $q \mid p-1$
-			\item $p$, $q$ published with $g\in(\ints/p\ints)^\ast$
-			\item $\sspace \equiv \kfspace = \ints_q$ and $\mespace \equiv \kspace = \{0,1\}^\ast$
-			\item $H_1$, $H_2: \{0,1\}^\ast \to \ints_q$ cryptographic hash functions 
-			\item $\keygen \coloneqq H_1$
-			\item private keys chosen uniformly from $\ints_q$
-			\item public keys $X_i = g^{x_i} \bmod p$ published
-		\end{itemize}
+      \begin{itemize}
+        \setlength\itemsep{.5em}
+        \item outputs two large primes $p$ and $q$ with $q \mid p-1$, and $g\in(\ints/p\ints)^\ast$
+        \item $\sspace \equiv \kfspace = \ints_q$ and $\mespace \equiv \kspace = \{0,1\}^\ast$
+        \item $H_1$, $H_2: \{0,1\}^\ast \to \ints_q$ cryptographic hash functions 
+        \item $\keygen \coloneqq H_1$
+        \item public keys $X_i = g^{x_i} \bmod p$ published
+      \end{itemize}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Concrete Scheme}
 
-	\begin{itemize}
-		\item \asign
-		\begin{itemize}
-			\item input: $\goedel{X_i, X_j, x_i, h_2, M}$
-			\item random $t\in\ints_q$
-			\item $h = H_2(g^t X_j^{h_2}\bmod p ~\|~ M)$
-			\item $h_1 = h - h_2 \bmod q$
-			\item $s = t - h_1 x_i \bmod q$
+  \begin{itemize}[<+->]
+		\setlength\itemsep{.5em}
+		\item \asign: $\goedel{X_i, \textcolor{MidnightBlue}{X_j}, \textcolor{Mahogany}{x_i}, \textcolor{BurntOrange}{f}, \textcolor{RubineRed}{M}}$
+    \begin{itemize}[<+->]
+		  \setlength\itemsep{.5em}
+			\item $h = H_2(g^{\textcolor{Plum}{t}} \textcolor{MidnightBlue}{X_j}^{\textcolor{BurntOrange}{f}}\bmod p ~\|~ \textcolor{RubineRed}{M})$ with $\textcolor{Plum}{t\in\ints_q}$ random
+			\item $h_1 = h - \textcolor{BurntOrange}{f} \bmod q$
+			\item $s = \textcolor{Plum}{t} - h_1 \textcolor{Mahogany}{x_i} \bmod q$
 		\end{itemize}
-		\item \averify
-		\begin{itemize}
-			\item input: $\goedel{\sigma, X_i, X_j, M}$
-			\item returns: $h_1 + h_2 \overset{?}{=} H_2(g^s X_{i}^{h_1} X_{j}^{h_2} \bmod p ~\|~ M) \bmod q$
+		\item \averify: $\goedel{\goedel{s, h_1, f}, X_i, X_j, M}$
+		\begin{itemize}[<+->]
+			\item returns: $h_1 + f \overset{?}{=} H_2(g^s \textcolor{SeaGreen}{X_i}^{h_1} \textcolor{MidnightBlue}{X_j}^{\textcolor{BurntOrange}{f}} \bmod p ~\|~ M) \bmod q$
 		\end{itemize}
 	\end{itemize}
 \end{frame}

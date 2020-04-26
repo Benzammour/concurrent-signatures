@@ -25,23 +25,10 @@
 
 			\visible<2->{\draw[<-] (setup.180) -- ++(180:0.5cm) node [left] {\phantom{$\keygen: \kspace \to \kfspace$}$\ell$};}
 
-      \visible<3->{\draw[->] (setup.20) -- ++(0:0.5cm) node [right] {$\uspace, \mespace, \sspace, \kspace, \kfspace$};}
-      \visible<3->{\draw[->] (setup.-20) -- ++(0:0.5cm) node [right] {$\keygen: \kspace \to \kfspace$};}
+      \visible<3->{\draw[->] (setup.20) -- ++(0:0.5cm) node [right] {$\uspace, \mespace, \sspace, \textcolor{BurntOrange}{\kspace}, \textcolor{Plum}{\kfspace}$};}
+      \visible<3->{\draw[->] (setup.-20) -- ++(0:0.5cm) node [right] {$\keygen: \textcolor{BurntOrange}{\kspace} \to \textcolor{Plum}{\kfspace}$};}
 		\end{tikzpicture}
 	\end{center}
-
-	% \begin{itemize}
-	% 	\item takes security parameter $\ell$
-	% 	\item outputs descriptions of all relevant sets and keys
-	% 		\begin{itemize}
-	% 			\item set of participants $\uspace$
-	% 			\item message space $\mespace$
-	% 			\item signature space $\sspace$
-	% 			\item keystone space $\kspace$
-	% 			\item keystone fix space $\kfspace$
-	% 		\end{itemize}
-	% 	\item function $\keygen: \kspace \to \kfspace$
-	% \end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -51,13 +38,13 @@
 		\begin{tikzpicture}
 			\visible<1->{\node[draw,minimum size=2.5cm] (asign) {\asign};}
 
-			\visible<2->{\draw[<-] (asign.140) -- ++(180:0.5cm) node [left] {\phantom{$\sigma=\goedel{s, h_1, h_2}$}$X_i$};}
-			\visible<2->{\draw[<-] (asign.180) -- ++(180:0.5cm) node [left] {$X_j$};}
+			\visible<2->{\draw[<-] (asign.140) -- ++(180:0.5cm) node [left] {\phantom{$\sigma=\goedel{s, h_1, f}$}$\textcolor{MidnightBlue}{X_i}$};}
+			\visible<2->{\draw[<-] (asign.180) -- ++(180:0.5cm) node [left] {$\textcolor{MidnightBlue}{X_j}$};}
 			\visible<3->{\draw[<-] (asign.220) -- ++(180:0.5cm) node [left] {$x_i$};}
 			\visible<4->{\draw[<-] (asign.north) -- ++(90:0.5cm) node [above] {$M$};}
-			\visible<5->{\draw[<-] (asign.south) -- ++(-90:0.5cm) node [below] {$h_2$};}
+			\visible<5->{\draw[<-] (asign.south) -- ++(-90:0.5cm) node [below] {$f$};}
 
-			\visible<6->{\draw[->] (asign.east) -- ++(0:0.5cm) node [right] {$\sigma = \goedel{s, h_1, h_2}$};}
+			\visible<6->{\draw[->] (asign.east) -- ++(0:0.5cm) node [right] {$\sigma = \goedel{s, h_1, f}$};}
 		\end{tikzpicture}
 	\end{center}
 
@@ -71,12 +58,12 @@
 		\begin{tikzpicture}
 			\visible<1->{\node[draw,minimum size=2.5cm] (asign) {\averify};}
 
-			\visible<2->{\draw[<-] (asign.140) -- ++(180:0.5cm) node (X_i) [left] {$\textcolor<6>{BurntOrange}{X_i}$};}
-			\visible<2->{\draw[<-] (asign.180) -- ++(180:0.5cm) node [left] {$\textcolor<6>{BurntOrange}{X_j}$};}
-			\visible<3->{\draw[<-] (asign.220) -- ++(180:0.5cm) node [left] (sigma) {$\textcolor<6>{BurntOrange}{\sigma = \goedel{s, h_1, h_2}}$};}
-			\visible<4->{\draw[<-] (asign.north) -- ++(90:0.5cm) node [above] (message) {$\textcolor<6>{BurntOrange}{M}$};}
+			\visible<2->{\draw[<-] (asign.140) -- ++(180:0.5cm) node (X_i) [left] {$\textcolor<6>{ForestGreen}{\textcolor<1-5>{MidnightBlue}{X_i}}$};}
+			\visible<2->{\draw[<-] (asign.180) -- ++(180:0.5cm) node [left] {$\textcolor<6>{ForestGreen}{\textcolor<1-5>{MidnightBlue}{X_j}}$};}
+			\visible<3->{\draw[<-] (asign.220) -- ++(180:0.5cm) node [left] (sigma) {$\textcolor<6>{ForestGreen}{\sigma = \goedel{s, h_1, f}}$};}
+			\visible<4->{\draw[<-] (asign.north) -- ++(90:0.5cm) node [above] (message) {$\textcolor<6>{ForestGreen}{M}$};}
 
-			\visible<6->{\node[above left=1cm of X_i, draw, ellipse, dotted, color=BurntOrange, thick] (S) {$\textcolor{BurntOrange}{S}$};}
+			\visible<6->{\node[above left=1cm of X_i, draw, ellipse, dotted, color=ForestGreen, thick] (S) {$\textcolor{ForestGreen}{S}$};}
 
 
 			\visible<5->{\draw[->] (asign.east) -- ++(0:0.5cm) node [right] {$accept/reject$};}
@@ -96,12 +83,12 @@
 		\resizebox{.9\hsize}{!}{
 			\begin{tikzpicture}[custom/.style = {rectangle, draw, align=center, inner xsep=3mm, inner ysep=3mm}, -latex]
 				% nodes
-				\visible<3->{\node[custom] (kgen) {$\keygen(k) \overset{?}{=} h_2$};}
-				\visible<5->{\node[custom, right=1cm of kgen.east] (averify) {$\averify(\textcolor<7->{BurntOrange}{S})$};
+				\visible<3->{\node[custom] (kgen) {$\keygen(\textcolor{Plum}{k}) \overset{?}{=} f$};}
+				\visible<5->{\node[custom, right=1cm of kgen.east] (averify) {$\averify(\textcolor{ForestGreen}{S})$};
 							\draw (kgen.east) -- node[above, scale=0.6]{$true$} (averify.west);}
 				\visible<1->{\node[fit={(kgen) (averify)}, draw, outer ysep=2mm, inner xsep=5mm, inner ysep=5mm, label={\Large\verify}] (outer) {};}
 				
-				\visible<2->{\node[left=.75cm of outer.west] (input) {$\goedel{k,\textcolor<7->{BurntOrange}{S}}$};}
+				\visible<2->{\node[left=.75cm of outer.west] (input) {$\goedel{\textcolor{Plum}{k},\textcolor{ForestGreen}{S}}$};}
 				\visible<6->{\node[right=1cm of averify.east] (output1) {$accept/reject$};}
 				\visible<4->{\node[below=1cm of output1.south] (output2) {$reject$};
 							\draw  (kgen.south) |- node[left, scale=0.6, yshift=.5cm]{$false$} (output2.west);}
@@ -112,21 +99,4 @@
 			\end{tikzpicture}
 		}
 	\end{center}
-
-	%\textcolor{blue}{\small explain/show on sec. slides what $S$ contains}
 \end{frame}
-
-% \begin{frame}
-% 	\frametitle{Algorithm Synergy}
-
-% 	\resizebox{.9\hsize}{!}{
-% 		\begin{tikzpicture}[custom/.style = {rectangle, draw, align=center, inner xsep=3mm, inner ysep=3mm}, -latex]
-% 			\node[custom] (asign) {\averify};
-% 			\node[custom, below=1cm of asign] (verify) {$\verify(S)$};
-% 			\node[custom, above left=.1cm of verify] (verify) {H};
-% 		\end{tikzpicture}
-% 	}
-
-% 	\textcolor{blue}{TODO: add verification, signing, oracle/hash function synergy graph}
-
-% \end{frame}

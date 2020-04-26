@@ -49,9 +49,11 @@
 \newcommand{\kspace}{\mathcal{K}}
 \newcommand{\kfspace}{\mathcal{F}}
 
-
 % --------------------------------------------------------- beamer/document setup
 \mode<presentation>
+
+\setbeamercolor{block title boxx}{fg=white,bg=blue}
+\setbeamercolor{block body boxx}{fg=white,bg=blue!50}
 
 \title{Concurrent Signatures}
 % \subtitle{subtitle}
@@ -119,10 +121,11 @@
 
 % --------------------------------------------------------- Proof of Lemmata
 \section{Concrete Scheme}
+
+\input{sections/concrete-scheme/preliminaries/dla.tex}
+
 \input{sections/concrete-scheme/main.tex}
 
-% Preliminaries
-\input{sections/concrete-scheme/preliminaries/dla.tex}
 \input{sections/concrete-scheme/preliminaries/ro.tex}
 \input{sections/concrete-scheme/preliminaries/definitions.tex}
 \input{sections/concrete-scheme/preliminaries/forking-lemma.tex}

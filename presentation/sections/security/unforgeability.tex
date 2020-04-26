@@ -2,10 +2,17 @@
 	\frametitle{Unforgeability}
 
 	\begin{itemize}[<+->]
-		\setlength\itemsep{1em}
-		\item consider Adversary-Challenger Game
-		\item $C$ answers to Queries as mentioned
-		\item $E$ outputs tuple $S = (\sigma, X_c, X_d, M)$ 
-		\item $E$ wins if $\averify(S) = accept$ and no Private Key Extraction Query was made
-		\end{itemize}
+		\item consider previous adversary-challenger game
+		\item \textcolor{Red}{$E$} can query everything 
+		\item eventually \textcolor{Red}{$E$} outputs tuple $S = (\sigma, X_c, X_d, M)$ 
+		\item \textcolor{Red}{$E$} wins if $\averify(S) = accept$ and no Private Key Extraction Query was made and
+      \begin{enumerate}
+        \item No \asign query with our parameters, and no \textbf{Private Key Extraction} query for $X_c$ or $X_d$ 
+	     	\item No \asign query with $\goedel{X_c, X_i, f, M}$, no \textbf{Private Key Extraction} query for $X_c$, and
+		    	\begin{itemize}
+            \item $f$ output from previous \keygen query or
+            \item \textcolor{Red}{$E$} produces keystone $k$ such that $f = \keygen(k)$
+          \end{itemize}
+      \end{enumerate}
+  \end{itemize}
 \end{frame}

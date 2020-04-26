@@ -1,12 +1,42 @@
 \begin{frame}
 	\frametitle{Ambiguity}
 
-	\begin{itemize}[<+->]
-		\setlength\itemsep{1em}
-		\item game consisting of query phases and a challenge
-		\item \textbf{Phase 1:} first round of queries from $E$ to $C$
-		\item \textbf{Challenge:} $E$ selects tuple, $C$ outputs challenge bit $b$
-		\item \textbf{Phase 2:} second round of queries from $E$ to $C$
-		\item $E$ guesses challenge bit with $b^\prime$; $E$ wins if $b=b^\prime$ 
-	\end{itemize}
+  	
+  \begin{center}
+    \resizebox{.95\hsize}{!}{
+      \begin{tikzpicture}[node distance=2cm,auto,>=stealth']
+        \node[draw, minimum width = 2cm, color=Red] (adversary) {Adversary};
+        \node[draw, minimum width = 2cm, color=ForestGreen, left = of adversary] (challenger) {Challenger};
+        \node[below of=adversary, node distance=8cm] (adversaryground) {};
+        \node[below of=challenger, node distance=8cm] (challengerground) {};
+        
+        % vertical lines
+        \draw (challenger) -- (challengerground);
+        \draw (adversary) -- (adversaryground);
+      
+        % setup
+        \node[left, align=left] at ($(challenger)!0.1!(challengerground)$) {\setup};
+        \visible<2->{\draw[->, dashed] ($(challenger)!0.1!(challengerground)$) -- node[sloped, above]{$\{X_i\}$} ($(adversary)!0.11!(adversaryground)$);}
+        
+        \visible<3->{\draw[->, dashed, BurntOrange] ($(adversary)!0.2!(adversaryground)$) -- node[sloped, above] (queries0) {queries} ($(challenger)!0.22!(challengerground)$);}
+        \visible<3->{\node[below = 0mm of queries0, black] {\huge \textcolor{BurntOrange}{$\vdots$}};}
+
+        \visible<4->{\draw[->, dashed] ($(adversary)!0.42!(adversaryground)$) -- node[sloped, above]{$\goedel{X_i, X_j, M}$} ($(challenger)!0.44!(challengerground)$);}
+
+        \visible<5->{\node[left, align=left] at ($(challenger)!0.5!(challengerground)$) {$k\in\kspace$, $f = \textbf{KGEN}(k), \textcolor{MidnightBlue}{b\in\{0,1\}}$};}
+        \visible<6->{\node[left, align=left] at ($(challenger)!0.6!(challengerground)$) {$\sigma_1$ if $b=0$, $\sigma_2$ otherwise};}
+
+        \visible<7->{\draw[->, dashed] ($(challenger)!0.6!(challengerground)$) -- node[sloped, above]{$\sigma_1$ or $\sigma_2$} ($(adversary)!0.62!(adversaryground)$);}
+
+        \visible<8->{\draw[->, dashed, BurntOrange] ($(adversary)!0.72!(adversaryground)$) -- node[sloped, above] (queries1) {queries} ($(challenger)!0.74!(challengerground)$);}
+        \visible<8->{\node[below = 0mm of queries1, black] {\huge \textcolor{BurntOrange}{$\vdots$}};}
+
+        \visible<9->{\draw[->, dashed] ($(adversary)!0.92!(adversaryground)$) -- node[sloped, above]{\textcolor{Mahogany}{$b'\in\{0,1\}$}} ($(challenger)!0.94!(challengerground)$);}
+        
+        \visible<10->{\node[left, align=left] at ($(challenger)!0.95!(challengerground)$) {$E$ wins if $\textcolor{MidnightBlue}{b}=\textcolor{Mahogany}{b'}$};}
+
+        \node[right, align=center] at ($(adversary)!0.42!(adversaryground)$) {\phantom{{$k\in\kspace$, $f = \textbf{KGEN}(k)$}}};
+      \end{tikzpicture}
+    }
+	\end{center}
 \end{frame}

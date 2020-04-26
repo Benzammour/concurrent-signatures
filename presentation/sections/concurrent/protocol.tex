@@ -30,24 +30,24 @@
         \node[right, align=right] at ($(bob)!0.1!(bobground)$) {~\setup};
     
         % k keystone + KGEN
-        \visible<2->{\node[left, align=left] at ($(alice)!0.225!(aliceground)$) {$k\in\kspace$, $\textcolor<9>{BurntOrange}{f} = \textbf{KGEN}(k)$};}
+        \visible<2->{\node[left, align=left] at ($(alice)!0.225!(aliceground)$) {$k\in\kspace$, $\textcolor{BurntOrange}{f} = \textbf{KGEN}(\textcolor{Plum}{k})$};}
         
         % ASIGN + Arrow
-        \visible<3->{\node[left, align=left] at ($(alice)!0.4!(aliceground)$) {$\asign(X_A, X_B, x_A, f, M_A)$ \\ {\visible<4->{$= \goedel{s_A, h_A, \textcolor<9>{BurntOrange}{f}} \eqqcolon \textcolor<7>{BurntOrange}{\sigma_A}$} }};}
-        \visible<5->{\draw[->, dashed] ($(alice)!0.4!(aliceground)$) -- node[sloped, above]{$\textcolor<7>{BurntOrange}{\sigma_A}$} ($(bob)!0.45!(bobground)$);}
+        \visible<3->{\node[left, align=left] at ($(alice)!0.4!(aliceground)$) {$\asign(\textcolor{MidnightBlue}{X_A, X_B}, x_A, \textcolor{BurntOrange}{f}, M_A)$ \\ {\visible<4->{$= \goedel{s_A, h_A, \textcolor{BurntOrange}{f}} \eqqcolon \textcolor<7>{Red}{\sigma_A}$} }};}
+        \visible<5->{\draw[->, dashed] ($(alice)!0.4!(aliceground)$) -- node[sloped, above]{$\textcolor<7>{Red}{\sigma_A}$} ($(bob)!0.45!(bobground)$);}
         
         % AVERIFY
-        \visible<6->{\node[right, align=center] at ($(bob)!0.45!(bobground)$) {$\averify(\textcolor<7>{BurntOrange}{\sigma_A}, X_A, X_B, M_A)$};}
+        \visible<6->{\node[right, align=center] at ($(bob)!0.45!(bobground)$) {$\averify(\textcolor<7>{Red}{\sigma_A}, \textcolor{MidnightBlue}{X_A, X_B}, M_A)$};}
 
         % ASIGN + Arrow
-        \visible<8->{\node[right, align=left] at ($(bob)!0.6!(bobground)$) {$\asign(X_B, X_A, x_B, \textcolor<9>{BurntOrange}{f}, M_B)$};}
+        \visible<8->{\node[right, align=left] at ($(bob)!0.6!(bobground)$) {$\asign(\textcolor{MidnightBlue}{X_B, X_A}, x_B, \textcolor{BurntOrange}{f}, M_B)$};}
         \visible<9->{\draw[->, dashed] ($(bob)!0.6!(bobground)$) -- node[sloped, above]{$\sigma_B$} ($(alice)!0.65!(aliceground)$);}
 
         % AVERIFY
-        \visible<10->{\node[left, align=left] at ($(alice)!0.65!(aliceground)$) {$\averify(\sigma_B, X_B, X_A, M_B)$};}
+        \visible<10->{\node[left, align=left] at ($(alice)!0.65!(aliceground)$) {$\averify(\sigma_B, \textcolor{MidnightBlue}{X_B, X_A}, M_B)$};}
 
         % keystone
-        \visible<11->{\draw[->, dashed] ($(alice)!0.8!(aliceground)$) -- node[above]{$k$} ($(bob)!0.85!(bobground)$);}
+        \visible<11->{\draw[->, dashed] ($(alice)!0.8!(aliceground)$) -- node[above]{$\textcolor{Plum}{k}$} ($(bob)!0.85!(bobground)$);}
       \end{tikzpicture}
     }
 	\end{center}

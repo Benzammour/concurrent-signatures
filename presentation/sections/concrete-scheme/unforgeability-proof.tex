@@ -36,7 +36,7 @@
 			\begin{tikzpicture}[custom/.style = {rectangle, draw, align=center, minimum width=1.5cm, inner xsep=3mm, inner ysep=3mm}, -latex]
 				% nodes
 				\visible<3->{\node[custom] (adversary) {$E$};}
-				\visible<4->{\node[above=.75cm of adversary] (adversary_input) {$\goedel{g, p, q}$};}
+				\visible<4->{\node[above=.75cm of adversary] (adversary_input) {$\textcolor{RubineRed}{\goedel{g, p, q}}$};}
 				\phantom{\node[below=.75cm of adversary, align=center] (forged_signature) {$\sigma = \goedel{s, h_1, f}$, \\ $X_c, X_d, M$};}
 
 				\visible<5->{\node[custom, right=.75cm of adversary_input] (participants) {$\mathcal{U}$};}
@@ -45,7 +45,7 @@
 				\visible<6->{\node[custom, right=.75cm of adversary] (pub_keys) {$X_i {\visible<7->{= g^{x_i} \bmod p}}$};}
 				
 				\visible<1->{\node[fit={(adversary_input) (priv_keys) (forged_signature)}, draw, outer ysep=2mm, inner xsep=5mm, inner ysep=5mm, label={\Large$\mathcal{A}$}] (outer_box) {};}
-				\visible<2->{\node[left=.5cm of outer_box.west] (input) {$\goedel{g, X, p, q}$};}
+				\visible<2->{\node[left=.5cm of outer_box.west] (input) {$\goedel{\textcolor{RubineRed}{g}, X, \textcolor{RubineRed}{p}, \textcolor{RubineRed}{q}}$};}
 				
 				% connections
 				\visible<2->{\draw (input.east) to (outer_box.west);}
@@ -60,7 +60,7 @@
 \begin{frame}
 	\frametitle{Proof - Simulation}
 
-	\begin{itemize}
+	\begin{itemize}[<+->]
 		\item $H_1, H_2$\textbf{-Queries}
 		\item \textbf{KGen-Queries}
 		\item \textbf{KReveal-Queries}
@@ -101,11 +101,11 @@
 \begin{frame}
 	\frametitle{Proof - Simulation}
 
-	With valid signature, one of the following holds
-	\begin{itemize}
+	\visible<1->{With valid signature, one of the following holds}
+	\begin{itemize}[<+->]
 		\item No \asign query with $\goedel{X_c, X_d, f, M}$, and no \textbf{Private Key Extraction} query for $X_c$ or $X_d$ 
 		\item No \asign query with $\goedel{X_c, X_i, f, M}$, no \textbf{Private Key Extraction} query for $X_c$, and
-			\begin{itemize}
+			\begin{itemize}[<4->]
 				\item $f$ output from previous \keygen query or
 				\item $E$ produces keystone $k$ such that $f = \keygen(k)$
 			\end{itemize}
@@ -136,7 +136,6 @@
 			\end{itemize}
 		\item due to different output from oracle queries:
 			\visible<+->{\begin{equation*}
-				% \textcolor<8->{ForestGreen}{g}^s \textcolor<8->{ForestGreen}{X}^{h_1} \textcolor<8->{ForestGreen}{X_d}^{\textcolor<+->{BurntOrange}{f}} = \textcolor<8->{ForestGreen}{g}^{s'} \textcolor<8->{ForestGreen}{X}^{h_1'} \textcolor<8->{ForestGreen}{X_d}^{\textcolor<+->{BurntOrange}{f}}
 				g^s X^{\textcolor<8->{BurntOrange}{h_1}} X_d^{\textcolor<8->{BurntOrange}{f}} = g^{s'} X^{\textcolor<8->{BurntOrange}{h_1'}} X_d^{\textcolor<8->{BurntOrange}{f}}
 			\end{equation*}}
 	\end{itemize}
@@ -167,7 +166,7 @@
     \item then we have: $\sigma = \goedel{s', h', f'}$
     \item due to $h = h'$ we have
       \[ h = H_2(\textcolor<4->{BurntOrange}{g^s X^{h_1} X_d^f} ~\|~ \textcolor<5->{ForestGreen}{M}) = H_2(\textcolor<4->{BurntOrange}{g^{s'} X_{c'}^{h_1'} X_{d'}^{f'}} ~\|~ \textcolor<5->{ForestGreen}{M'}) = h' \]
-    \item<6-> when $X \neq X_{c'}, X_{d'}$ or $X_{c'}, X_{d'} = 0$ but exponents are different
+    \item<6-> when $X_{c'}, X_{d'} \neq X$, or $X_{c'}, X_{d'} = X$ but exponents are different
       \[ g^s X^{h_1} X_d^f = X_{c'}^{h_1'} X_{d'}^{f'} \]
       is easily solveable for $x$
   \end{itemize}

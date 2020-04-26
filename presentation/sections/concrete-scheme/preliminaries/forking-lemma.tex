@@ -1,3 +1,10 @@
 \begin{frame}
-	\frametitle{Forking Lemma}
+  \frametitle{Forking Lemma}
+
+  \visible<1->{applies to signature schemes with signature form $\goedel{r_1, h, r_2}$ on message $M$}
+
+  \begin{definition}<2->
+    If an algorithm $E$ creates a signature $\goedel{\textcolor{BurntOrange}{r_1}, h, r_2}$ from public data with non-negligible probability, there exists algorithm $A$ which controls $E$ and forces it to rerun to create a second valid signature $\goedel{\textcolor{BurntOrange}{r_1}, h', r_2^\prime}$.  
+  \end{definition}
+
 \end{frame}
