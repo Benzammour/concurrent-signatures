@@ -24,7 +24,7 @@
         \visible<4->{\draw[->, dashed] ($(adversary)!0.42!(adversaryground)$) -- node[sloped, above]{$\goedel{X_i, X_j, M}$} ($(challenger)!0.44!(challengerground)$);}
 
         \visible<5->{\node[left, align=left] at ($(challenger)!0.5!(challengerground)$) {$k\in\kspace$, $f = \textbf{KGEN}(k), \textcolor{MidnightBlue}{b\in\{0,1\}}$};}
-        \visible<6->{\node[left, align=left] at ($(challenger)!0.6!(challengerground)$) {$\sigma_1$ if $b=0$, $\sigma_2$ otherwise};}
+        \visible<6->{\node[left, align=left] at ($(challenger)!0.6!(challengerground)$) {$\sigma_1$ if $\textcolor{MidnightBlue}{b=0}$, $\sigma_2$ otherwise};}
 
         \visible<7->{\draw[->, dashed] ($(challenger)!0.6!(challengerground)$) -- node[sloped, above]{$\sigma_1$ or $\sigma_2$} ($(adversary)!0.62!(adversaryground)$);}
 

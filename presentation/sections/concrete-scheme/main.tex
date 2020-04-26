@@ -20,14 +20,14 @@
 
   \begin{itemize}[<+->]
 		\setlength\itemsep{.5em}
-		\item \asign: $\goedel{X_i, \textcolor{MidnightBlue}{X_j}, \textcolor{Mahogany}{x_i}, \textcolor{BurntOrange}{f}, \textcolor{RubineRed}{M}}$
+		\item \asign: $\goedel{\textcolor{SeaGreen}{X_i}, \textcolor{MidnightBlue}{X_j}, \textcolor{Mahogany}{x_i}, \textcolor{BurntOrange}{f}, M}$
     \begin{itemize}[<+->]
 		  \setlength\itemsep{.5em}
-			\item $h = H_2(g^{\textcolor{Plum}{t}} \textcolor{MidnightBlue}{X_j}^{\textcolor{BurntOrange}{f}}\bmod p ~\|~ \textcolor{RubineRed}{M})$ with $\textcolor{Plum}{t\in\ints_q}$ random
+			\item $h = H_2(g^{\textcolor{Plum}{t}} \textcolor{MidnightBlue}{X_j}^{\textcolor{BurntOrange}{f}}\bmod p ~\|~ M)$ with $\textcolor{Plum}{t\in\ints_q}$ random
 			\item $h_1 = h - \textcolor{BurntOrange}{f} \bmod q$
 			\item $s = \textcolor{Plum}{t} - h_1 \textcolor{Mahogany}{x_i} \bmod q$
 		\end{itemize}
-		\item \averify: $\goedel{\goedel{s, h_1, f}, X_i, X_j, M}$
+		\item \averify: $\goedel{\goedel{s, h_1, f}, \textcolor{SeaGreen}{X_i}, \textcolor{MidnightBlue}{X_j}, M}$
 		\begin{itemize}[<+->]
 			\item returns: $h_1 + f \overset{?}{=} H_2(g^s \textcolor{SeaGreen}{X_i}^{h_1} \textcolor{MidnightBlue}{X_j}^{\textcolor{BurntOrange}{f}} \bmod p ~\|~ M) \bmod q$
 		\end{itemize}

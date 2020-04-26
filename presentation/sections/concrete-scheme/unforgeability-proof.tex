@@ -23,7 +23,7 @@
 			\begin{itemize}
 				\item simulates random oracles and challenger $C$
 				\item input: $\goedel{g, X, p , q}$
-				\item goal: find $x\in\ints_q$ s.t. $g^x = X \bmod p$
+				\item goal: find \textcolor{Plum}{$x\in\ints_q$} s.t. $g^{\textcolor{Plum}{x}} = X \bmod p$
 			\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -60,7 +60,8 @@
 \begin{frame}
 	\frametitle{Proof - Simulation}
 
-	\begin{itemize}[<+->]
+  \begin{itemize}[<+->]
+	  \setlength\itemsep{1em}
 		\item $H_1, H_2$\textbf{-Queries}
 		\item \textbf{KGen-Queries}
 		\item \textbf{KReveal-Queries}
@@ -77,7 +78,7 @@
 			\begin{tikzpicture}[custom/.style = {rectangle, draw, align=center, minimum width=1.5cm, inner xsep=3mm, inner ysep=3mm}, -latex]
 				% nodes
 				\visible<1->{\node[custom] (adversary) {$E$};}
-				\visible<1->{\node[above=.75cm of adversary] (adversary_input) {$\goedel{g, p, q}$};}
+				\visible<1->{\node[above=.75cm of adversary] (adversary_input) {$\textcolor{RubineRed}{\goedel{g, p, q}}$};}
 				\visible<2->{\node[below=.75cm of adversary, align=center] (forged_signature) {$\sigma = \goedel{s, h_1, f}$, \\ $X_c, X_d, M$};}
 
 				\visible<1->{\node[custom, right=.75cm of adversary_input] (participants) {$\mathcal{U}$};}
@@ -86,7 +87,7 @@
 				\visible<1->{\node[custom, right=.75cm of adversary] (pub_keys) {$X_i = g^{x_i} \bmod p$};}
 				
 				\visible<1->{\node[fit={(adversary_input) (priv_keys) (forged_signature)}, draw, outer ysep=2mm, inner xsep=5mm, inner ysep=5mm, label={\Large$\mathcal{A}$}] (outer_box) {};}
-				\visible<1->{\node[left=.5cm of outer_box.west] (input) {$\goedel{g, X, p, q}$};}
+				\visible<1->{\node[left=.5cm of outer_box.west] (input) {$\goedel{\textcolor{RubineRed}{g}, X, \textcolor{RubineRed}{p}, \textcolor{RubineRed}{q}}$};}
 				
 				% connections
 				\visible<1->{\draw (input.east) to (outer_box.west);}
@@ -101,42 +102,31 @@
 \begin{frame}
 	\frametitle{Proof - Simulation}
 
-	\visible<1->{With valid signature, one of the following holds}
-	\begin{itemize}[<+->]
+	\visible<+->{With \textcolor{Plum}{valid} signature, one of the following holds}
+  \begin{itemize}[<+->]
+	  \setlength\itemsep{1em}
 		\item No \asign query with $\goedel{X_c, X_d, f, M}$, and no \textbf{Private Key Extraction} query for $X_c$ or $X_d$ 
-		\item No \asign query with $\goedel{X_c, X_i, f, M}$, no \textbf{Private Key Extraction} query for $X_c$, and
-			\begin{itemize}[<4->]
-				\item $f$ output from previous \keygen query or
-				\item $E$ produces keystone $k$ such that $f = \keygen(k)$
-			\end{itemize}
+		\item No \asign query with $\goedel{X_c, X_i, f, M}$, no \textbf{Private Key Extraction} query for $X_c$
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Proof - Simulation}
 
-	\begin{itemize}
-		\item if $X_c \neq X_\alpha$, $\mathcal{A}$ aborts because it's lost
-		\item Therefore assume: $X_c = X_\alpha = X$
-		\item with second case we have:
-			$$h = h_1 + f = H_2(g^s X_{c}^{h_1} X_d^f \bmod p ~\|~ M)$$
-	\end{itemize}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Proof - Simulation}
-
-	\textbf{Case 1:} $h = h_1 + f$ never appeared in previous signature query
+  \visible<+->{with second case we have equation
+    $$h = h_1 + f = H_2(g^s X_{c}^{h_1} X_d^f \bmod p ~\|~ M)$$}
+    
+	\visible<+->{\textbf{Case 1:} $h = h_1 + f$ never appeared in previous signature query}
 	\begin{itemize}[<+->]
-		\item force $E$ to rerun simulation to produce $(r_1, h', r_2')$ with $h \neq h'$
+		\item force $E$ to rerun simulation to produce $(r_1, h', r_2')$ with \textcolor{Plum}{$h \neq h'$}
 		\item we have $h = h_1 + f \neq h_1' + f' = h'$
-			\begin{itemize}[<+->]
+			\begin{itemize}[<5->]
 				\item $h_1 \overset{?}{=} h_1'$
-				\item \textcolor<+->{BurntOrange}{$f \overset{?}{=} f'$}
+				\item \textcolor{BurntOrange}{$f \overset{?}{=} f'$}
 			\end{itemize}
 		\item due to different output from oracle queries:
 			\visible<+->{\begin{equation*}
-				g^s X^{\textcolor<8->{BurntOrange}{h_1}} X_d^{\textcolor<8->{BurntOrange}{f}} = g^{s'} X^{\textcolor<8->{BurntOrange}{h_1'}} X_d^{\textcolor<8->{BurntOrange}{f}}
+				g^s X^{\textcolor<7->{BurntOrange}{h_1}} X_d^{\textcolor<7->{BurntOrange}{f}} = g^{s'} X^{\textcolor<7->{BurntOrange}{h_1'}} X_d^{\textcolor<7->{BurntOrange}{f}}
 			\end{equation*}}
 	\end{itemize}
 \end{frame}

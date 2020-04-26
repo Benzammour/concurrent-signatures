@@ -1,27 +1,30 @@
-\documentclass{beamer}
+\documentclass[usenames,dvipsnames]{beamer}
 
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{amsmath,stmaryrd}
 \usepackage{tikz}
 \usepackage{pgfplots}
 \usetikzlibrary{calc,positioning,arrows,decorations.markings}
 \pgfplotsset{compat=1.14}
 
-% --------------------------------------------------------- x'ed out arrow
-\newcommand*{\StrikeThruDistance}{0.2cm}%
-\newcommand*{\StrikeThru}{\StrikeThruDistance,\StrikeThruDistance}%
-\tikzset{
-  strike thru arrow/.style={
-    decoration={
-      markings, mark=at position 0.5 with {
-        \draw [red, very thick, solid,-] ++ (-\StrikeThruDistance,-\StrikeThruDistance) -- ( \StrikeThruDistance, \StrikeThruDistance);
-        \draw [red, very thick, solid,-] ++ (-\StrikeThruDistance,\StrikeThruDistance) -- (\StrikeThruDistance, -\StrikeThruDistance);
-      }
-    },
-    postaction={decorate},
-  }
-}
-
 % --------------------------------------------------------- abbrev
 \newcommand{\goedel}[1]{\langle #1 \rangle}
+\newcommand{\nats}{\mathbb{N}}
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\ints}{\mathbb{Z}}
+
+\newcommand{\asign}{\textbf{ASIGN} }
+\newcommand{\setup}{\textbf{SETUP} }
+\newcommand{\averify}{\textbf{AVERIFY} }
+\newcommand{\verify}{\textbf{VERIFY} }
+\newcommand{\keygen}{\textbf{KGEN} }
+
+\newcommand{\mespace}{\mathcal{M}}
+\newcommand{\sspace}{\mathcal{S}}
+\newcommand{\uspace}{\mathcal{U}}
+\newcommand{\kspace}{\mathcal{K}}
+\newcommand{\kfspace}{\mathcal{F}}
 
 % --------------------------------------------------------- beamer/document setup
 \mode<presentation>
@@ -65,63 +68,32 @@
 
 % --------------------------------------------------------- Global
 \begin{frame}
-	\frametitle{Outline}
-	\tableofcontents
+	\frametitle{Overview}
+  \begin{center}
+    \begin{description}
+	  	% \setlength\itemsep{12em}
+      \item[\(\sigma\):] \(\goedel{s,h_1,f}\)
+      \item[\(S\):] \(\goedel{\sigma, X_i, X_j, M}\)
+      \item[queries:] 
+        \vspace{.2cm}
+          \begin{minipage}{0.35\textwidth}
+            \begin{itemize}
+              \item \textbf{KGen}
+              \item \textbf{KReveal}
+              \item \textbf{ASign} 
+            \end{itemize}
+          \end{minipage}%
+          \begin{minipage}{0.35\textwidth}
+            \begin{itemize}
+              \item \textbf{AVerify / Verify}
+              \item \textbf{Private Key Extraction}  
+            \end{itemize}
+          \end{minipage}\vspace{.3cm}
+      \item[spaces:] $\sspace \equiv \kfspace = \ints_q$ and $\mespace \equiv \kspace = \{0,1\}^\ast$
+  \end{description} 
+  \end{center}
+  
 \end{frame}
 
-% --------------------------------------------------------- Introduction
-\section{Introduction}
-% \input{sections/introduction/main.tex}
-
-\subsection{Fair Signature Exchange}
-% \input{sections/introduction/fse.tex}
-
-\subsection{Concurrent Approach}
-% \input{sections/introduction/conapp.tex}
-
-% --------------------------------------------------------- Preliminaries
-\section{Preliminaries}
-% \input{sections/preliminaries/main.tex}
-
-\subsection{Discrete Logarithm Assumption}
-% \input{sections/preliminaries/dla.tex}
-
-\subsection{Random Oracle}
-% \input{sections/preliminaries/ro.tex}
-
-\subsection{Relevant Signatures}
-% \input{sections/preliminaries/signatures.tex}
-
-\subsection{Definitions}
-\input{sections/preliminaries/definitions.tex}
-
-% example in security model
-
-% --------------------------------------------------------- Security Model
-\section{Security Model}
-% \input{sections/security/main.tex}
-
-\subsection{Correctness}
-% \input{sections/security/correctness.tex}
-
-\subsection{Unforgeability}
-% \input{sections/security/unforgeability.tex}
-
-\subsection{Ambiguity}
-% \input{sections/security/ambiguity.tex}
-
-\subsection{Fairness}
-% \input{sections/security/fairness.tex}
-
-\subsection{Security}
-% \input{sections/security/security.tex}
-
-% --------------------------------------------------------- Proof of Lemma X
-\section{Proofs}
-\input{sections/proofs.tex}
-
-% --------------------------------------------------------- Conclusion
-\section{Conclusion}
-\input{sections/conclusion.tex}
 
 \end{document}
