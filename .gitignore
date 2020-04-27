@@ -245,3 +245,4 @@ TSWLatexianTemp*
 *.pdf
 
 .DS_Store
+.vscode/
