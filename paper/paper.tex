@@ -20,17 +20,101 @@
 
 % ------------------------------- packages
 \usepackage{cite}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{amsmath,stmaryrd}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{
+  calc,
+  positioning,
+  arrows,
+  decorations.markings,
+  shapes,
+  fit
+}
+\tikzset{>=latex}
+\pgfplotsset{compat=1.14}
+
+\def\thesubsectiondis{\thesectiondis\arabic{subsection}.}
+\def\thesubsubsectiondis{\thesubsectiondis\arabic{subsubsection}.}
+\def\theparagraphdis{\thesubsubsectiondis\arabic{paragraph}.}
+
+% ------------------------------- abbrevs
+\newcommand{\goedel}[1]{\langle #1 \rangle}
+\newcommand{\nats}{\mathbb{N}}
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\ints}{\mathbb{Z}}
+
+\newcommand{\mespace}{\mathcal{M}}
+\newcommand{\sspace}{\mathcal{S}}
+\newcommand{\uspace}{\mathcal{U}}
+\newcommand{\kspace}{\mathcal{K}}
+\newcommand{\kfspace}{\mathcal{F}}
 
 \begin{document}
 \maketitle
 
-
 \begin{abstract}
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+  By trying to solve the problem of fair signature exchange, Chen et al. proposed a concurrent approach that works for most real applications. 
+  All involved parties stay ambiguous and are not bound by their signatures until an additional piece of information is released, the so called \textit{keystone}.
 \end{abstract}
 
 \section{Introduction}
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+Creating a signature scheme that provides true fairness is a well studied problem and a few approaches exist to create adequate fairness for most applications.
+The concurrent signature scheme does exactly that by using random bits to obfuscate the signing parties, who will be bound to their respective signature when the seed to generate these random bits is released.
+
+\section{Construction}
+  A signature scheme is called a \textit{concurrent signature} scheme if it holds four algorithms, namely \textbf{SETUP}, \textbf{ASIGN}, \textbf{AVERIFY}~ and \textbf{VERIFY}.
+   
+  \subsection{\textbf{SETUP}}
+    This algorithm initiates all relevant information for further course of action.
+    It takes a security parameter \(\ell\) as input and returns the description of \(\mespace, \sspace, \uspace, \kspace, \kfspace\) alongside with the public keys \(\{X_i\}\) and any additional parameters \(\rho\) that might be needed.
+    Each participant keeps their respective private key \(x_i\) hidden. 
+
+  \subsection{\textbf{ASIGN}}
+    This algorithm takes the input \(\goedel{X_i, X_j, x_i, f, M}\) with \(f\in\kfspace\) being the keystone-fix which is generated through \(\textbf{KGEN}\) and the keystone, and \(M\in\mespace\).
+    Upon receiving the input, it outputs a, so called, \textit{ambiguous signature} \(\sigma=\goedel{s, h_1, f}\).
+
+  \subsection{\textbf{AVERIFY}}
+    Upon receiving the input \(S = \goedel{\sigma, X_i, X_j, M}\) with \(\sigma=\goedel{s,h_1, f}\) this algorithm returns \(accept\) or \(verify\) depending on the validity of the provided input.
+  
+  \subsection{\textbf{VERIFY}}
+    Lastly, this algorithm takes \(\goedel{k,S}\) as the input and checks whether or not \(\textbf{KGEN}(k) = f\), and if this is the case, checks whether or not \(\textbf{ASIGN}(S)=accept\).
+    If both conditions hold, \textbf{VERIFY} returns \(accept\) and \(reject\) otherwise.
+
+\section{Security Model}
+  To label our concurrent signature scheme as \textit{secure} a certain set of conditions has to hold. 
+  In this scheme we define these properties through fairness, ambiguity and unforgeability.
+  
+  To define the mentioned properties we first of all have to define our game, in which we have an adversary \(E\) and a challenger \(C\).
+  In this game \(C\) runs \textbf{SETUP} and publishes all public variables to the public domain. 
+  
+  The adversary can query the challenger for certain information. 
+  First being a \textbf{KGen} query, meaning \(E\) can request \(C\) to generate a keystone-fix.
+  It can also request \(C\) to release the keystone to a given keystone-fix through a \textbf{KReveal} query.
+  The goal of \textbf{ASign} queries is to receive an \textit{ambiguous signature} from \(C\). 
+  Lastly, the adversary can provide a public key for a \textbf{Private Key Extraction} query in order to receive the respective private key from \(C\).
+  Note, that \(C\) does not answer to \textbf{AVerify / Verify} queries because the adversary can run the needed algorithms itself.
+
+  \subsection{Fairness}
+    In order to define fairness in our scheme, consider the previously defined game between the adversary and the challenger.
+    The adversary can initially query everything it wants and \(C\) answers accordingly.
+    Eventually, however, the adversary returns two public keys \(X_c, X_d\), a keystone \(k\in\kspace\), \(S=\goedel{\sigma, X_c, X_d, M}\) with \(\sigma=\goedel{s, h_1, f}\), and \(\textbf{AVERIFY}(S) = accept\).
+    The adversary \(E\) wins if either
+      \begin{enumerate}
+        \item if \(f\) from previous query, no \textbf{KReveal} query was made on \(f\) and if \(\goedel{k,S}\) is accepted by \textbf{VERIFY}, or
+        \item if \(E\) produces a second \(S' = \goedel{\sigma', X_d, X_c, M'}\) with \(\sigma' = \goedel{s', h_1', f}\) such that \(\textbf{AVERIFY}(S')=accept\).
+              Continuing, \(\goedel{k,S}\) is accepted by \textbf{VERIFY}, but  \(\goedel{k,S'}\) is rejected.
+      \end{enumerate}
+    In the first case, the adversary produces the keystone matching to an arbitrary \(f\) which is valid.
+    The second case describes the case in which the adversary is able to create a signature, with the same keystone-fix, that is not bound upon releasing the keystone.
+
+  \subsection{Ambiguity}
+
+  \subsection{Unforgeability}
+
+\section{Proof of Unforgeability}
 
 \section*{References}
 
