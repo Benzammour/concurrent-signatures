@@ -22,7 +22,7 @@
 \usepackage{cite}
 \usepackage{xcolor}
 \usepackage{mathtools}
-\usepackage{amsmath,stmaryrd}
+\usepackage{amsmath,stmaryrd, amssymb}
 \usepackage{tikz}
 \usepackage{pgfplots}
 \usetikzlibrary{
@@ -52,6 +52,10 @@
 \newcommand{\kspace}{\mathcal{K}}
 \newcommand{\kfspace}{\mathcal{F}}
 
+\newcommand{\Set}[1]{\ensuremath{ \{ #1 \}}}
+
+\newtheorem{definition}{\bfseries Definition}
+
 \begin{document}
 \maketitle
 
@@ -61,8 +65,43 @@
 \end{abstract}
 
 \section{Introduction}
-Creating a signature scheme that provides true fairness is a well studied problem and a few approaches exist to create adequate fairness for most applications.
-The concurrent signature scheme does exactly that by using random bits to obfuscate the signing parties, who will be bound to their respective signature when the seed to generate these random bits is released.
+  Creating a signature scheme that provides true fairness is a well studied problem and a few approaches exist to create adequate fairness for most applications.
+  The concurrent signature scheme does exactly that by using random bits to obfuscate the signing parties, who will be bound to their respective signature when the seed to generate these random bits is released.
+
+\section{Preliminaries}
+  For our following construction and the proof later on, we will need certain constructs and tools.
+  These will be defined in the following.
+
+  \begin{definition}[\textnormal{\textit{Generator}}]
+    Let \(\mathbb{G}\) be a cyclic group of order \(p\). Then a group generator is \(g\in\mathbb{G}\) such that it fulfills
+      \[\mathbb{G} = \Set{g^i \bmod p \mid i\in\nats}\]
+    This means, that by taking the generator to the multiple powers, while taking the modulus of \(p\), we can generate all elements of our given group.
+  \end{definition}
+
+  \begin{definition}[\textnormal{\textit{Discrete Logarithm}}]
+    In a group \(\mathbb{G}\) we define the \textit{discrete logarithm} as an integer \(x\) such that \(b^x = a\) for an arbitrary integer \(a\) and \(b^x = \underbrace{b\cdot \ldots\cdot b}_{x \text{ times}}\).
+  \end{definition}
+
+  \begin{definition}[\textnormal{\textit{Hardness of the discrete logarithm?}}]
+    \textcolor{blue}{Lorem Ipsum}
+  \end{definition}
+
+  \begin{definition}[\textnormal{\textit{Random Oracle}}]
+    \textcolor{blue}{Lorem Ipsum}
+  \end{definition}
+
+  \begin{definition}[\textnormal{\textit{Chosen Message Attack}}]
+    \textcolor{blue}{Lorem Ipsum}
+  \end{definition}
+
+  \begin{definition}[\textnormal{\textit{Negligible function}}]
+    \textcolor{blue}{Lorem Ipsum}
+  \end{definition}
+
+  \begin{definition}[\textnormal{\textit{Forking Lemma}}]
+    \textcolor{blue}{Lorem Ipsum}
+  \end{definition}
+
 
 \section{Construction}
   A signature scheme is called a \textit{concurrent signature} scheme if it holds four algorithms, namely \textbf{SETUP}, \textbf{ASIGN}, \textbf{AVERIFY}~ and \textbf{VERIFY}.
@@ -111,10 +150,24 @@ The concurrent signature scheme does exactly that by using random bits to obfusc
     The second case describes the case in which the adversary is able to create a signature, with the same keystone-fix, that is not bound upon releasing the keystone.
 
   \subsection{Ambiguity}
+    Our defined game is split into three phases now, the first query phase, the challenge phase and, lastly, the second query phase. 
+    After the challenger sent all public variables to the adversary, the adversary starts the first query phase by requesting anything it wants but eventually, it has to send a, so called, \textit{challenge tuple} to the challenger.
+    This tuple is of the form \(\goedel{X_i, X_j, M}\) and represents the info the adversary wants to be challenged to.
+    Then, the challenger flips a coin \(b\in\Set{0,1}\) and if \(b = 0\) it sends an ambiguous signature \(\sigma\) to the adversary on behalf of \(X_i\).
+    Otherwise, the challenger sends an ambiguous signature on behalf of \(X_j\). Now, the adversary can start its second query phase, and eventually sends the challenge bit, which is a guess whose signature the challenger sent to our adversary.
+    The adversary wins if the challenge bit matches the flipped coin of the challenger because then it managed to circumvent the ambiguity of the scheme.
+  
+    \subsection{Unforgeability}
+      We, again, consider the previously defined adversary--challenger game.
+      The adversary can query everything it wants, but finally it has to return \(S=\goedel{\sigma, X_c, X_d, M}\) where \(\sigma=\goedel{s, h_1, f}\), \(X_c, X_d\) being public keys and \(M\in\mespace\) being the message.
+      Continuing, the adversary wins the game if \(\textbf{AVERIFY}(S) = accept\) and if either
+        \begin{enumerate}
+          \item No \textbf{ASign} query was made with input \(\goedel{X_c, X_d, f, M}\) or \(\goedel{X_d, X_c, h_1, M}\).
+                And no \textbf{Private Key Extraction} query was made on either \(X_c\) or \(X_d\).
+          \item No \textbf{ASign} query was made with input \(\goedel{X_c, X_i, f, M}\) for all \(X_i \neq X_c, X_i\in\uspace\) and no \textbf{Private Key Extraction} query was made for \(X_c\).
+        \end{enumerate}
 
-  \subsection{Unforgeability}
-
-\section{Proof of Unforgeability}
+\section{Proof of Lemma 3}
 
 \section*{References}
 
