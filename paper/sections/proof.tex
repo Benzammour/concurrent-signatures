@@ -1,0 +1,109 @@
+To prove that the defined scheme is \textit{unforgeable}, assuming the hardness of the discrete logarithm problem, we are going to assume that our scheme is \textit{not} unforgeable.
+That means there exists an algorithm \(E\) that can forge a signature with non-negligible probability.
+We make use of this, and construct another algorithm \(\mathcal{A}\) that takes \(\goedel{g,X,p,q}\) as its input and uses \(E\) as a component to solve the discrete logarithm problem, which would result in a contradiction to our assumption.
+
+Before we start constructing our \(\mathcal{A}\) we need to show that we can rewrite our ambiguous signature format \(\sigma = \goedel{s,h_1, f}\) as \(\goedel{r_1, h, r_2}\) in order to use the forking lemma later on.
+We define \(r_1\) to be \(g^t X_j^f \bmod p\), which fulfills the property that it takes its values randomly from a huge set \(\ints_q\), \(h = h_1 + f\) is the hash of the message \(M\) and \(r_1\), and lastly \(r_2 = s\) which depends solely on \(r_1, h\) and \(M\).
+
+Furthermore, we model our hash functions \(H_1, H_2\) as random oracles, and in our following construction the algorithm \(\mathcal{A}\) simulates these random oracles and the challenger \(C\) that our forging-adversary \(E\) plays against.
+
+Now, our algorithm \(\mathcal{A}\) starts by generating our participants \(\mathcal{U}\). It guesses that our forging-adversary \(E\) chooses \(X_\alpha\) for the position \(X_c\) in its output, and, therefore, sets \(X_\alpha = X\).
+This means, that we want to acquire the discrete logarithm for the challenge public key \(X_\alpha\).
+It also chooses a private key \(x_i\), which is randomly chosen from \(\ints_q\), for all participants \(i\) that are not \(\alpha\).
+Otherwise, the game would be pointless due to generating the discrete logarithm, we want to acquire, on our own.
+After all of that, \(\mathcal{A}\) passes on \(\goedel{g,p,q}\), as well as the public keys, to our forging-adversary.
+As an overview of our setup we have 
+
+\begin{figure}[htbp]
+
+  \begin{center}
+    \resizebox{\hsize}{!}{
+      \begin{tikzpicture}[custom/.style = {rectangle, draw, align=center, minimum width=1.5cm, inner xsep=3mm, inner ysep=3mm}, -latex]
+        % nodes
+        \node[custom] (adversary) {$E$};
+        \node[above=.75cm of adversary] (adversary_input) {$\goedel{g, p, q}$};
+  
+        \node[custom, right=.75cm of adversary_input] (participants) {$\mathcal{U}$};
+        \node[custom, right=.75cm of participants] (priv_keys) {$x_i$};
+        
+        \node[custom, right=.75cm of adversary] (pub_keys) {$X_i = g^{x_i} \bmod p$};
+        
+        \node[fit={(adversary_input) (priv_keys) (pub_keys)}, draw, outer ysep=2mm, inner xsep=5mm, inner ysep=5mm, label={\Large$\mathcal{A}$}] (outer_box) {};
+        \node[left=.5cm of outer_box.west] (input) {$\goedel{g, X, p, q}$};
+        
+        % connections
+        \draw (input.east) to (outer_box.west);
+        \draw (adversary_input.south) to (adversary.north);
+        \draw (pub_keys.west) to (adversary.east);
+      \end{tikzpicture}
+    }
+  \end{center}
+
+  \caption{Proof - Overview}
+  \label{fig:proofoverview}
+\end{figure}
+
+Now, our forging-adversary \(E\) can start querying requests, which include all of the queries from \autoref{secmodel} with a few additions and changes.
+We add \(H_1\)- and \(H_2\) queries, with which \(E\) can query the respective oracle to acquire a hash. 
+Moreover, we modify our \textbf{ASign} queries such that if \(\mathcal{A}\) receives a correct input \(\goedel{X_i, X_j, f, M}\) with \(i\neq\alpha\) we return a signature as defined in \autoref{secmodel}.
+However, if \(i = \alpha\) \(\mathcal{A}\) picks random values for \(h_1\) and \(s\), and calculates the \(H_2\) hash from these values.
+This happens with the premise that the random values and resulting string have never appeared in any \(H_2\) query before, otherwise \(\mathcal{A}\) chooses other values for \(h_1\) and \(s\) and starts again.
+
+After a number of requests our forging-adversary returns a ambiguous signature \(\sigma = \goedel{s,h_1, f}\), public keys \(X_c\) and \(X_d\), and the message \(M\).
+We know, from our definition in \ref{unforgeability}, that the adversary wins if \textbf{AVERIFY} accepts \(\sigma\) alongside with the public keys and the message, and if one of the following cases holds
+  \begin{enumerate}
+    \item No \textbf{ASign} query was made with input \(\goedel{X_c, X_d, f, M}\) or \(\goedel{X_d, X_c, h_1, M}\).
+          And no \textbf{Private Key Extraction} query was made on either \(X_c\) or \(X_d\).
+    \item No \textbf{ASign} query was made with input \(\goedel{X_c, X_i, f, M}\) for all \(X_i \neq X_c, X_i\in\uspace\) and no \textbf{Private Key Extraction} query was made for \(X_c\).
+  \end{enumerate}
+
+In \cite{abe20021} Abe et al. showed that our first case is negligible, assuming the hardness of the discrete logarithm problem. 
+We know that our forging-adversary forges signatures with non-negligible probability, therefore, the second case must have occurred.
+
+Furthermore, we assume that \(X_c = X_\alpha = X\) because otherwise, \(\mathcal{A}\) aborts as a result of failing the prediction of the challenge public key.
+\textcolor{blue}{explain further?} 
+
+Because \textbf{AVERIFY} returns \(accept\) and we know that it checks \(h_1 + f \overset{?}{=} H_2(g^s X_{c}^{h_1} X_d^f \bmod p ~\|~ M)\), we now have the equation
+\[h_1 + f \overset{?}{=} H_2(g^s X_{c}^{h_1} X_d^f \bmod p ~\|~ M)\]
+which leaves two new cases to investigate.
+
+The \textit{first} case is, that \(h = h_1 + f\) has never occurred in any signature query before.
+If that is the case, we rewrite our ambiguous signature to \(\goedel{r_1, h, r_2}\) and force \(E\) to produce a second signature \(\goedel{r_1, h', r_2'}\) with \(h\neq h'\).
+
+Now, we have two ambiguous signatures (by rewriting the second one) with \(\sigma = \goedel{s, h_1, f}\) and \(\sigma^\prime = \goedel{s', h_1', f'}\), and \(h \neq h'\).
+This results in \(h = h_1 + f \neq h_1' + f'\) which implies that either \(h_1 \neq h_1'\) or \(f \neq f'\).
+The case in which \(h_1 = h_1'\) is negligible because then the relevant \(h_1\) queries would have to been calculated before the \(H_2\) queries that produced \(h\) and \(h'\) which is not possible.
+In addition, it would imply that \(f = f'\) but if that would be the case the output of our \(H_1\) (that produces \(f\) and \(f'\)) oracle would have to match an \(H_2\) query.
+Henceforth, we know that \(h_1 \neq h_1'\) and \(f = f'\).
+As a consequence of \(h\) and \(h'\) resulting from different oracle queries we have
+\begin{align}
+  g^{s} X^{h_1} X_d^f &= g^{s'} X^{h_1'} X_d^{f'} \\
+  s + x h_1 + f &= s' + x h_1' + f' \quad\mid f=f'\\
+  s + x h_1 &= s' + x h_1' \qquad \mid h_1 \neq h_1' \label{divbyh1}\\
+  x &= \frac{s-s'}{h_1' - h_1}
+\end{align}
+So, in the first case \(\mathcal{A}\) solves the discrete logarithm problem of \(X\) with non-negligible probability.
+This contradicts the hardness of the discrete logarithm problem and therefore, for the first case, this scheme is unforgeable.
+
+Continuing with the second case, here we assume that \(h = h'\) with \(h' = h_1' + f\) appeared in a previous signature query.
+We denote said signature request with \(\goedel{X_{c'}, X_{d'}, f', M'}\) and its resulting signature with \(\sigma' = \goedel{s', h_1', f'}\).
+Because we have \(h = h'\) we know that
+  \[H_2(g^s X^{h_1} X_d^f \bmod p)  = H_2(g^{s'} X_{c'}^{h_1'} X_{d'}^{f'} \bmod p) \]
+and \(M = M'\) have to hold.
+Otherwise, the input of the hash functions would not be the same, and therefore \(h \neq h'\).
+
+Here, we have to differentiate further.
+If \(X_{c'} = X\), \(X_{d'} = X\) but their exponents differ, or \(X_{c'},X_{d'} \neq X\) we can easily derive the discrete logarithm \(x\) of \(X\) with the same argument as in the first case.
+It is important for the case where \(X_{c'} = X\) or \(X_{d'} = X\), that the exponents differ because otherwise we would have a division by 0 in step \ref{divbyh1} of resolving to \(x\).
+
+However, let's take a closer look at the case where \(X_{c'} = X\) or \(X_{d'} = X\), and their exponents are \textit{the same}.
+If we had \(X_{c'} = X\) and \(h_1 = h_1'\), because the exponents (ie \(h_1, h_1'\)) are the same, then that would imply that \(f = f'\) due to \(h = h'\).
+This, however, because we set \(X_c = X\) it is a contradiction to the condition that no \textbf{ASIGN} queries can be made of the form \(\goedel{X_c, X_i, f, M}\).
+Now, what if he had \(X_{d'} = X\) and \(h_1 = f'\).
+Then, when \(h_1' = h'  f'\) was generated in a previous \textbf{ASIGN} query, \(f = h_1'\) already had to hold by definition.
+Moreover, we also know that the output of \textbf{ASIGN} queries is determined by oracles \(H_1\) and \(H_2\).
+Now, the problem is that \(f\) also is generated by \(H_1\). That means that an output of \(H_1\) has to match an \(h_1'\), that is generated by \(H_2\) and \(H_1\).
+The probability of this occurring is negligible and therefore not relevant. 
+
+With this, we showed that the discrete logarithm problem could also be solved in the second case.
+Globally speaking, this means that Lemma \textcolor{blue}{ref Lemma} holds.

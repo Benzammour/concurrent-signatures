@@ -1,0 +1,15 @@
+Creating a signature scheme that provides true fairness in exchanging these signatures is a well-studied problem and a few approaches already exist trying to solve it.
+
+Among them is, for example, the optimistic fair exchange presented in \cite{asokan1998optimistic} with the usage of a trusted third party that can mitigate the signature exchange and rule out any fraud on either side. 
+The problem with this would be the need of a third entity, even if it is only needed when one party wants to cheat the other. 
+
+The concurrent signature scheme \cite{chen2004concurrent} tries to solve that by using random bits to obfuscate the signing parties, who will be ambiguous to every other party.
+With this, neither party is at a disadvantage, e.g. if the other party does not want to sign the item anymore.
+These signatures are bound to their respective signer by releasing the key to generating these random bits.
+
+In this paper, we will show how such a concurrent signature scheme can be constructed.
+However, the focus of this paper lies in providing an intuitive understanding of the unforgeability proof provided in \cite{chen2004concurrent}.
+
+In the following chapter, we will define certain preliminaries that we are going to use throughout this document.
+\Cref{construction} defines the concrete construction of this scheme, \cref{secmodel} defines when our signature scheme can be labeled as \textit{secure}.
+Lastly, \cref{unforgproof} provides the unforgeability proof of \cite{chen2004concurrent} in a clear matter.

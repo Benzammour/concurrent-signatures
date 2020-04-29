@@ -1,0 +1,67 @@
+A signature scheme is called a \textit{concurrent signature} scheme if it holds four algorithms, namely \textbf{SETUP}, \textbf{ASIGN}, \textbf{AVERIFY}~ and \textbf{VERIFY}.
+This concrete construction is based on the Schnorr signature scheme presented in \cite{schnorr1991efficient} with which we can leverage properties for our concurrent scheme.
+We define our algorithms as follows
+   
+\subsection{\textbf{SETUP}}
+  This algorithm initiates all relevant information for further course of action.
+  It takes a security parameter \(\ell\) as input and, among other things, returns two large primes \(p\) and \(q\) where \(q \mid p-1\) has to hold.
+  Furthermore, it returns a group generator \(g\in(\ints/p\ints)^\ast\) as well as \(\mespace, \sspace, \kspace, \kfspace\) with \(\mespace \equiv \kspace = \Set{0,1}^\ast\) and \(\sspace \equiv \kfspace = \ints_q\).
+  It generates private keys \(x_i\) which are randomly chosen from \(\ints_q\), the public keys \(\Set{X_i = g^{x_i} \bmod p}\) and the set of participants \(\mathcal{U}\).
+  The public keys and the set of participants are available in the public domain.
+  Continuing, two cryptographic hash functions \(H_1, H_2: \Set{0,1}^\ast \to \ints_q\), alongside the function \(\textbf{KGEN} \coloneqq H_1\)
+  Lastly it returns any additional parameters \(\rho\) that might be needed, and, note that, each participant keeps their respective private key \(x_i\) hidden. 
+
+\subsection{\textbf{ASIGN}}
+  This algorithm takes \(\goedel{X_i, X_j, x_i, f, M}\) as input where \(X_i, X_j\) are public keys with \(i\neq j\).
+  Furthermore \(x_i\in\ints_q\) is the public key of \(i\), \(f\in\kfspace\) being the keystone-fix, which is generated through \(\textbf{KGEN}\), and \(M\in\mespace\) being the message.
+  
+  It calculates
+    \begin{align*}
+      h &= H_2(g^t X_j^f \bmod p ~\|~ M)\\
+      h_1 &= h - f \bmod q\\
+      s &= t - h_1 x_i \bmod q
+    \end{align*}
+  whereas \(t\in \ints_q\) is chosen at random.
+  With this it returns a, so called, \textit{ambiguous signature} \(\sigma=\goedel{s, h_1, f}\).
+
+\subsection{\textbf{AVERIFY}}
+  This algorithm takes \(S \coloneqq \goedel{\sigma, X_i, X_j, M}\) as input, with \(\sigma=\goedel{s,h_1, f}\).
+  It returns \(accept\) or \(verify\) depending on whether or not 
+    \begin{equation}
+      h_1 + f = H_2(g^t X_j^f \bmod p ~\|~ M) \bmod q \label{averifyeq}
+    \end{equation}
+  holds. 
+  This equation has to hold because we have \(h_1 = h - f\) and \(h = H_2(g^t X_j^f \bmod p ~\|~ M)\).
+  Therefore by rearranging it we get \autoref{averifyeq}.
+
+\subsection{\textbf{VERIFY}}
+  Lastly, this algorithm takes \(\goedel{k,S}\) as the input and checks whether or not \(\textbf{KGEN}(k) = f\), and if this is the case, checks whether or not \(\textbf{ASIGN}(S)=accept\).
+  If both conditions hold, \textbf{VERIFY} returns \(accept\) and \(reject\) otherwise.
+  As an overview to highlight each component, we have
+
+  \begin{figure}[htbp]
+    
+    \begin{center}
+      \resizebox{.99\hsize}{!}{
+        \begin{tikzpicture}[custom/.style = {rectangle, draw, align=center, inner xsep=3mm, inner ysep=3mm}, -latex]
+          % nodes
+          \node[custom] (kgen) {$\textbf{KGEN}(k) \overset{?}{=} f$};
+          \node[custom, right=1cm of kgen.east] (averify) {$\textbf{AVERIFY}(S)$};
+                \draw (kgen.east) -- node[above, scale=0.6]{$true$} (averify.west);
+          \node[fit={(kgen) (averify)}, draw, outer ysep=2mm, inner xsep=5mm, inner ysep=5mm, label={\Large\textbf{VERIFY}}] (outer) {};
+          
+          \node[left=.75cm of outer.west] (input) {$\goedel{k,S}$};
+          \node[right=1cm of averify.east] (output1) {$accept/reject$};
+          \node[below=1cm of output1.south] (output2) {$reject$};
+                \draw (kgen.south) |- node[left, scale=0.6, yshift=.5cm]{$false$} (output2.west);
+
+          % connections
+          \draw (input.east) to (kgen.west);
+          \draw (averify.east) to (output1.west);
+        \end{tikzpicture}
+      }
+    \end{center}
+    
+    \caption{\textbf{VERIFY} Components}
+    \label{fig:verifycomp}
+  \end{figure}
