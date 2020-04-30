@@ -242,7 +242,7 @@ TSWLatexianTemp*
 *.spl
 
 # generated pdfs
-*.pdf
+#*.pdf
 
 .DS_Store
 .vscode/
