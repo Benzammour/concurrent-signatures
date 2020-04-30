@@ -1,0 +1,64 @@
+This section is responsible for providing an understanding of the concrete signature protocol and how the algorithms defined in \autoref{construction} should be used.
+
+We will illustrate the protocol through an exemplary interaction between a party A(lice) and B(ob). 
+The following description will be visually supported through \autoref{fig:concprotocol}. 
+
+Firstly, we start by having both parties run the \textbf{SETUP} function to initialize all necessary variables for this scheme.
+Our, so called, \textit{initial signer} continues with generating a keystone \(k\in\kspace\) alongside the corresponding keystone-fix \(f\in\kfspace\).
+Keep in mind, that the keystone-fix is generated through \(\textbf{KGEN}(k)\).
+We set, without loss of generality, Alice as our initial signer.
+Continuing, the initial signer starts off by signing a message \(M_A\in\mespace\) through \textbf{ASIGN}, while providing the private keys of herself and Bob, her own private key \(x_A\) and the keystone-fix \(f\).
+Afterwards, Alice sends the resulting ambiguous signature \(\sigma_A = \goedel{s_A, h_A, f}\) to Bob.
+He verifies said signature by checking if \textbf{AVERIFY} returns \(accept\), for which he additionally provides their respective public keys, as well as, Alice's message \(M_A\).
+Note, that we are not trying to encrypt or obfuscate the messages in any way.
+Bob and Alice, repeat the signing and verification steps analogously for Bob with the \textit{same keystone-fix}, i.e. Bob generates and sends his ambiguous signature with \(f\) and Alice verifies it.
+Lastly, if Alice is satisfied with Bobs signature, she publishes the keystone \(k\) with which both \textit{ambiguous signatures} will be binding for both parties.
+
+The power of who is generating and holding the keystone-fix is the one thing that keeps the concurrent signature scheme to be \textit{truly fair}.
+Because with this, the initial signer (i.e. the one that generates the keystone(-fix)) can withhold the keystone.
+However, this would not be beneficial for the withholding party in real applications.
+Moreover, even if the withholding party keeps the keystone, without releasing it, the other party is not bound to the signature, meaning it is at no disadvantage. 
+
+\begin{figure}[htbp]
+  \centering
+  
+  \resizebox{.99\hsize}{!}{
+    \begin{tikzpicture}[node distance=2cm,auto,>=stealth']
+      \node[] (bob) {B};
+      \node[left = of bob] (alice) {A};
+      \node[below of=bob, node distance=8cm] (bobground) {};
+      \node[below of=alice, node distance=8cm] (aliceground) {};
+      
+      % vertical lines
+      \draw (alice) -- (aliceground);
+      \draw (bob) -- (bobground);
+    
+      % setup
+      \node[left, align=left] at ($(alice)!0.1!(aliceground)$) {\textbf{SETUP}};
+      \node[right, align=right] at ($(bob)!0.1!(bobground)$) {~\textbf{SETUP}};
+  
+      % k keystone + KGEN
+      \node[left, align=left] at ($(alice)!0.225!(aliceground)$) {$k\in\kspace$, $f = \textbf{KGEN}(k)$};
+      
+      % ASIGN + Arrow
+      \node[left, align=left] at ($(alice)!0.4!(aliceground)$) {$\textbf{ASIGN}(X_A, X_B, x_A, f, M_A)$ \\ {$= \goedel{s_A, h_A, f} \eqqcolon \sigma_A$}};
+      \draw[->, dashed] ($(alice)!0.4!(aliceground)$) -- node[sloped, above]{$\sigma_A$} ($(bob)!0.45!(bobground)$);
+      
+      % AVERIFY
+      \node[right, align=center] at ($(bob)!0.45!(bobground)$) {$\textbf{AVERIFY}(\sigma_A, X_A, X_B, M_A)$};
+
+      % ASIGN + Arrow
+      \node[right, align=left] at ($(bob)!0.65!(bobground)$) {$\textbf{ASIGN}(X_B, X_A, x_B, f, M_B)$};
+      \draw[->, dashed] ($(bob)!0.65!(bobground)$) -- node[sloped, above]{$\sigma_B$} ($(alice)!0.7!(aliceground)$);
+
+      % AVERIFY
+      \node[left, align=left] at ($(alice)!0.7!(aliceground)$) {$\textbf{AVERIFY}(\sigma_B, X_B, X_A, M_B)$};
+
+      % keystone
+      \draw[->, dashed] ($(alice)!0.8!(aliceground)$) -- node[above]{$k$} ($(bob)!0.85!(bobground)$);
+    \end{tikzpicture}
+  }
+
+  \caption{Concurrent Signature Protocol - An Overview}
+  \label{fig:concprotocol}
+\end{figure}

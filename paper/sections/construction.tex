@@ -1,5 +1,5 @@
 A signature scheme is called a \textit{concurrent signature} scheme if it holds four algorithms, namely \textbf{SETUP}, \textbf{ASIGN}, \textbf{AVERIFY}~ and \textbf{VERIFY}.
-This concrete construction is based on the Schnorr signature scheme presented in \cite{schnorr1991efficient} with which we can leverage properties for our concurrent scheme.
+This concrete construction is based on the non-separable signature scheme in \cite{abe20021}, which, in turn, is a modification of the Schnorr signature scheme presented in \cite{schnorr1991efficient} with which we can leverage properties for our concurrent scheme.
 We define our algorithms as follows
    
 \subsection{\textbf{SETUP}}
@@ -31,13 +31,13 @@ We define our algorithms as follows
       h_1 + f = H_2(g^t X_j^f \bmod p ~\|~ M) \bmod q \label{averifyeq}
     \end{equation}
   holds. 
-  This equation has to hold because we have \(h_1 = h - f\) and \(h = H_2(g^t X_j^f \bmod p ~\|~ M)\).
+  This equation is checked because we have \(h_1 = h - f\) and \(h = H_2(g^t X_j^f \bmod p ~\|~ M)\).
   Therefore by rearranging it we get \autoref{averifyeq}.
 
 \subsection{\textbf{VERIFY}}
   Lastly, this algorithm takes \(\goedel{k,S}\) as the input and checks whether or not \(\textbf{KGEN}(k) = f\), and if this is the case, checks whether or not \(\textbf{ASIGN}(S)=accept\).
   If both conditions hold, \textbf{VERIFY} returns \(accept\) and \(reject\) otherwise.
-  As an overview to highlight each component, we have
+  To provide an overview for how each component works in \textbf{VERIFY}, \autoref{fig:verifycomp} shows exactly this synergy.
 
   \begin{figure}[htbp]
     

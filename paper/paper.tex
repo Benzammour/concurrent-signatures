@@ -1,8 +1,8 @@
 % \documentclass[final]{article}%
-\documentclass[final]{IEEEtran}%
+\documentclass[final, 11pt]{IEEEtran}%
 
-% \usepackage[margin=1in]{geometry}
-% \renewcommand{\baselinestretch}{1.2}
+% \usepackage[margin=.8in]{geometry}
+\renewcommand{\baselinestretch}{1.2}
 
 \title{Concurrent Signatures}
 \ifcsname{IEEEauthorblockN}\endcsname%
@@ -27,6 +27,7 @@
 \usepackage{hyperref}
 \usepackage{xcolor}
 \usepackage{mathtools}
+\usepackage{enumerate}
 \usepackage{amsmath,stmaryrd, amssymb}
 \usepackage{cleveref}
 \usepackage{tikz}
@@ -61,15 +62,15 @@
 \newcommand{\Set}[1]{\ensuremath{ \{ #1 \}}}
 
 \newtheorem{definition}{\bfseries Definition}
-
-\newtheorem{remark}{Notation}
+\newtheorem{lemma}{\bfseries Lemma}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
   By trying to solve the problem of fair signature exchange, Chen et al. proposed a concurrent approach that works for most real applications. 
-  All involved parties stay ambiguous and are not bound by their signatures until an additional piece of information is released, the so-called \textit{keystone}.
+  It enables parties to produce signatures in an ambiguous way, regarding the parties identity, and are not bound by their signatures.
+  They are bound to said signatures upon releasing an additional piece of information, the so-called \textit{keystone}, after which the true identity of the signer will be known.
 \end{abstract}
 
 \section{Introduction}
@@ -78,23 +79,20 @@
 \section{Preliminaries}
   \input{sections/prelims}
 
-  {\color{blue}
-  \begin{remark}
-    we define \(\cdot \| \cdot \) as concatenation.
-  \end{remark}
-
-  \begin{remark}
-    we define \(k\) to be be the keystone.
-  \end{remark}}
-
 \section{Construction}\label{construction}
   \input{sections/construction}
+
+\section{Protocol}\label{protocol}
+  \input{sections/protocol}
 
 \section{Security Model} \label{secmodel}
   \input{sections/securitymodel}
 
 \section{Proof of Unforgeability}\label{unforgproof}
   \input{sections/proof}
+
+\section{Conclusion}\label{conclusion}
+\input{sections/conclusion}
 
 \bibliography{bibliography}
 \bibliographystyle{alpha}

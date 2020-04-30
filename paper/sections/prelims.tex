@@ -1,20 +1,6 @@
 For our following construction and the proof, later on, we will need certain constructs and tools.
 These will be defined in the following.
 
-\begin{definition}[\textnormal{\textit{Generator}}]
-  Let \(\mathbb{G}\) be a cyclic group of order \(p\). Then a group generator is \(g\in\mathbb{G}\) such that it fulfills
-    \[\mathbb{G} = \Set{g^i \bmod p \mid i\in\nats}\]
-  This means, that by taking the generator to the multiple powers, while taking the modulus of \(p\), we can generate all elements of our given group.
-\end{definition}
-
-\begin{definition}[\textnormal{\textit{Discrete Logarithm}}]
-  In a group \(\mathbb{G}\), we define the \textit{discrete logarithm} as an integer \(x\) such that \(b^x = a\) for an arbitrary integer \(a\) and \(b^x = \underbrace{b\cdot \ldots\cdot b}_{x \text{ times}}\).
-\end{definition}
-
-\begin{definition}[\textnormal{\textit{Hardness of the discrete logarithm?}}]
-  \textcolor{blue}{Lorem Ipsum}
-\end{definition}
-
 \begin{definition}[\textnormal{\textit{Random Oracle}}]
   A \textit{random oracle} is a black-box algorithm which serves each \textit{unique} request with a truly random value. Moreover, it serves each duplicate request with the same answer it sent before.
 \end{definition}
@@ -23,15 +9,52 @@ These will be defined in the following.
   In a signature scheme, a \textit{chosen message attack} enables the adversary to get the signature of several messages, meaning it can query the signing oracle.
 \end{definition}
 
-\begin{definition}[\textnormal{\textit{Negligible function}}]
-  We say a function \(f\) is negligible if 
-  \[f(n) < \frac{1}{n^c}\]
-  for a sufficiently large \(n\in\nats\). This means, that our function \(f\) converges towards 0. 
-\end{definition}
+\subsection{Mathematical Concepts}
+  In the following this chapter is going to introduce all mathematical concepts needed to follow the line of thought in the coming course of action. 
+  
+  \begin{definition}[\textnormal{\textit{Generator}}]
+    Let \(\mathbb{G}\) be a cyclic group of order \(p\). Then a group generator is \(g\in\mathbb{G}\) such that it fulfills
+      \[\mathbb{G} = \Set{g^i \bmod p \mid i\in\nats}\]
+    This means, that by taking the generator to multiple powers, while taking the modulus of \(p\), we can generate all elements of our given group.
+  \end{definition}
 
-\begin{definition}[\textnormal{\textit{Forking Lemma}}]
-  In \cite{pcstern96} Pointcheval and Stern introduced a tool for signature schemes, the \textit{forking lemma}. 
+  \begin{definition}[\textnormal{\textit{Discrete Logarithm}}]
+    In a group \(\mathbb{G}\), we define the \textit{discrete logarithm} as an integer \(x\) such that \(b^x = a\) for an arbitrary integer \(a\) and \(b^x = \overbrace{b\cdot \ldots\cdot b}^{x \text{ times}}\).
+  \end{definition}
+
+  \begin{definition}[\textnormal{\textit{Negligible function}}]
+    We say a function \(f\) is negligible if 
+    \[f(n) < \frac{1}{n^c}\]
+    for a sufficiently large \(n\in\nats\). This means, that our function \(f\) converges towards 0. 
+  \end{definition}
+
+\subsection{Hardness of the Discrete Logarithm}
+  We define the hardness of the discrete logarithm analogously to \cite{katz2014introduction}, starting with the
+
+  \begin{definition}[\textnormal{\textit{Discrete logarithm experiment}}]
+    For this experiment \(DLog_{\mathcal{A}, \mathcal{G}}(\ell)\)  we consider \(\mathcal{G}\) to be a cyclic group generator that takes a security parameter \(\ell\) as its input.
+    Therefore, we start of by running \(\mathcal{G}(1^\ell)\) to acquire \((\mathbb{G}, p, g)\) where $\mathbb{G}$ is a cyclic group of order \(p\), and \(g\in\mathbb{G}\) is a group generator of \(\mathbb{G}\).
+    We pick an \(a\in\mathbb{G}\) at random, and pass all information to an algorithm \(\mathcal{A}\).
+    If \(\mathcal{A}\) is able to calculate an \(x\) such that \(g^x = a\) we return 1 and 0 otherwise.
+  \end{definition}
+
+  Continuing, now we define the actual hardness property we want to acquire
+
+  \begin{definition}
+    We say that the \textit{discrete logarithm problem is hard} relative to \(\mathcal{G}\) if for all algorithms \(\mathcal{A}\) there exists a negligible function \(\mathrm{negl}\) such that
+      \[\mathrm{Pr}[DLog_{\mathcal{A}, \mathcal{G}}(\ell) = 1] \leq \mathrm{negl}(\ell)\]
+  \end{definition}
+
+  That means, that it is hard for an algorithm to reliably calculate the discrete logarithm of any number \(a^\prime\in\mathbb{G}\).
+
+\subsection{Forking Lemma}
+  In \cite{pcstern96} and \cite{pointcheval2000security}  Pointcheval and Stern introduced a tool for signature schemes, the \textit{forking lemma}. 
   It states that if an algorithm \(E\) can produce a signature \(\goedel{r_1, h, r_2}\) with \(r_1\) has to be randomly chosen from a huge set, \(h\) being the hash of the message and \(r_1\), and \(r_2\) depending only on \(r_1, h\) and the message, on public input, then there exists another algorithm \(\mathcal{A}\) that controls said algorithm \(E\).
   \(\mathcal{A}\) can then replay \(E\), with replacing the signer by the simulation, to generate a second valid signature \(\goedel{r_1, h', r_2'}\) with \(h\neq h'\).
-\end{definition}
 
+\subsection{Notation}
+  We define a certain set of notation to make communicating concepts easier.
+  \begin{itemize}
+    \item we define \(\cdot \| \cdot \) as string concatenation
+    \item we define \(k\) to be be the keystone
+  \end{itemize}
