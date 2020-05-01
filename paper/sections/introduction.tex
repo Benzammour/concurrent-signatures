@@ -1,18 +1,19 @@
-Creating a signature scheme that provides true fairness in exchanging signatures is a well-studied problem and a few approaches already exist trying to solve it.
+Creating a signature scheme that provides true fairness in exchanging signatures is a well-studied problem and a few approaches trying to solve it already exist.
 
 Among them is, for example, the optimistic fair exchange presented in \cite{asokan1998optimistic} with the usage of a trusted third party that can supervise the signature exchange and rule out any fraud on either side. 
 The problem with this would be the need of a third entity, even if it is only needed when one party wants to cheat the other. 
 
 The concurrent signature scheme \cite{chen2004concurrent} tries to solve that by using random bits to obfuscate the signing parties, who will be ambiguous to every other party.
 With this, neither party is at a disadvantage, e.g. if the other party does not want to sign the item anymore.
-These signatures are bound to their respective signer by releasing the key that generates said random bits, we call this key the \textit{keystone}.
+These signatures are bound to their respective signer by releasing the key that generates said random bits.
+We call this key the \textit{keystone}.
 This concurrent scheme does not provide a solution for a \textit{truly fair} signature exchange, however, it provides an adequate solution for most applications.
 
 In this paper, we will show how such a concurrent signature scheme can be constructed.
-The focus of this paper, however, lies in providing an intuitive understanding of the unforgeability proof provided in \cite{chen2004concurrent}.
-We will make use of a concrete scheme defined in \cite{chen2004concurrent} which builds upon other signature schemes.
+The focus of this paper, though, lies in providing an intuitive understanding of the unforgeability proof provided in \cite{chen2004concurrent}.
+We will make use of a concrete scheme, defined in \cite{chen2004concurrent} which builds upon other signature schemes.
 Note, that this signature scheme is not limited to the concrete one we define here, each suitable scheme can be used to produce a concurrent protocol.
 
 In the following chapter, we will define certain preliminaries that we are going to need throughout this paper.
-\Cref{construction} defines the concrete construction of this scheme and \cref{protocol} describes how our construction should be used.
-\Cref{secmodel} defines when our signature scheme can be labeled as \textit{secure} and, lastly, \cref{unforgproof} explains the unforgeability proof of \cite{chen2004concurrent}.
+\Cref{construction} presents the concrete construction of this scheme and \cref{protocol} describes how our construction should be used.
+\Cref{secmodel} defines when our signature scheme can be labeled as \textit{secure} and, lastly, \cref{unforgproof} explains the unforgeability proof presented in \cite{chen2004concurrent}.

@@ -29,7 +29,7 @@
 \usepackage{mathtools}
 \usepackage{enumerate}
 \usepackage{amsmath,stmaryrd, amssymb}
-\usepackage{cleveref}
+\usepackage[noabbrev]{cleveref}
 \usepackage{tikz}
 \usepackage{pgfplots}
 \usetikzlibrary{
@@ -43,9 +43,8 @@
 \tikzset{>=latex}
 \pgfplotsset{compat=1.14}
 
-\def\thesubsectiondis{\thesectiondis\arabic{subsection}.}
-\def\thesubsubsectiondis{\thesubsectiondis\arabic{subsubsection}.}
-\def\theparagraphdis{\thesubsubsectiondis\arabic{paragraph}.}
+\def\thesubsectiondis{\thesectiondis\roman{subsection}.}
+\renewcommand\thesubsection{\thesection.\roman{subsection}.}
 
 % ------------------------------- abbrevs
 \newcommand{\goedel}[1]{\langle #1 \rangle}

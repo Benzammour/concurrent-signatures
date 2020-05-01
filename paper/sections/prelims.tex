@@ -10,7 +10,7 @@ These will be defined in the following.
 \end{definition}
 
 \subsection{Mathematical Concepts}
-  In the following this chapter is going to introduce all mathematical concepts needed to follow the line of thought in the coming course of action. 
+  This chapter is going to introduce all mathematical concepts needed to follow the line of thought in the coming course of action. 
   
   \begin{definition}[\textnormal{\textit{Generator}}]
     Let \(\mathbb{G}\) be a cyclic group of order \(p\). Then a group generator is \(g\in\mathbb{G}\) such that it fulfills
@@ -23,22 +23,22 @@ These will be defined in the following.
   \end{definition}
 
   \begin{definition}[\textnormal{\textit{Negligible function}}]
-    We say a function \(f\) is negligible if 
+    We say a function \(f\) is negligible if for all \(c\in\nats^{\geq 1}\) there exists a \(n_0\in\nats\) such that for all \(n \geq n_0\)
     \[f(n) < \frac{1}{n^c}\]
-    for a sufficiently large \(n\in\nats\). This means, that our function \(f\) converges towards 0. 
+    holds. This means, that our function \(f\) converges towards 0. 
   \end{definition}
 
 \subsection{Hardness of the Discrete Logarithm}
   We define the hardness of the discrete logarithm analogously to \cite{katz2014introduction}, starting with the
 
   \begin{definition}[\textnormal{\textit{Discrete logarithm experiment}}]
-    For this experiment \(DLog_{\mathcal{A}, \mathcal{G}}(\ell)\)  we consider \(\mathcal{G}\) to be a cyclic group generator that takes a security parameter \(\ell\) as its input.
-    Therefore, we start of by running \(\mathcal{G}(1^\ell)\) to acquire \((\mathbb{G}, p, g)\) where $\mathbb{G}$ is a cyclic group of order \(p\), and \(g\in\mathbb{G}\) is a group generator of \(\mathbb{G}\).
+    For an experiment \(DLog_{\mathcal{A}, \mathcal{G}}(\ell)\) we consider \(\mathcal{G}\) to be a cyclic group generator, and \(\mathcal{A}\) to be a polynomial-time algorithm.
+    Firstly, we start off by running \(\mathcal{G}(1^\ell)\) to acquire \((\mathbb{G}, p, g)\) where $\mathbb{G}$ is a cyclic group of order \(p\), and \(g\in\mathbb{G}\) is a group generator of \(\mathbb{G}\).
     We pick an \(a\in\mathbb{G}\) at random, and pass all information to an algorithm \(\mathcal{A}\).
     If \(\mathcal{A}\) is able to calculate an \(x\) such that \(g^x = a\) we return 1 and 0 otherwise.
   \end{definition}
 
-  Continuing, now we define the actual hardness property we want to acquire
+  Now we define the actual hardness property we want to acquire
 
   \begin{definition}
     We say that the \textit{discrete logarithm problem is hard} relative to \(\mathcal{G}\) if for all algorithms \(\mathcal{A}\) there exists a negligible function \(\mathrm{negl}\) such that
@@ -49,12 +49,14 @@ These will be defined in the following.
 
 \subsection{Forking Lemma}
   In \cite{pcstern96} and \cite{pointcheval2000security}  Pointcheval and Stern introduced a tool for signature schemes, the \textit{forking lemma}. 
-  It states that if an algorithm \(E\) can produce a signature \(\goedel{r_1, h, r_2}\) with \(r_1\) has to be randomly chosen from a huge set, \(h\) being the hash of the message and \(r_1\), and \(r_2\) depending only on \(r_1, h\) and the message, on public input, then there exists another algorithm \(\mathcal{A}\) that controls said algorithm \(E\).
-  \(\mathcal{A}\) can then replay \(E\), with replacing the signer by the simulation, to generate a second valid signature \(\goedel{r_1, h', r_2'}\) with \(h\neq h'\).
+  It states that if an algorithm \(E\) can produce a signature \(\goedel{r_1, h, r_2}\) on public input, where \(r_1\) randomly chosen from a huge set and \(h\) being the hash of the message and \(r_1\).
+  Also \(r_2\) only depending on \(r_1, h\) and the message.
+  Then there exists another algorithm \(\mathcal{A}\) that controls said algorithm \(E\).
+  \(\mathcal{A}\) can then replay \(E\), replacing the signer by the simulation, to generate a second valid signature \(\goedel{r_1, h', r_2'}\) with \(h\neq h'\).
 
 \subsection{Notation}
   We define a certain set of notation to make communicating concepts easier.
   \begin{itemize}
-    \item we define \(\cdot \| \cdot \) as string concatenation
-    \item we define \(k\) to be be the keystone
+    \item We define \(\cdot \| \cdot \) as string concatenation
+    \item We define \(k\) to be be the keystone
   \end{itemize}
